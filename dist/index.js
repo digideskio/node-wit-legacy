@@ -1,41 +1,41 @@
 (function(e, a) { for(var i in a) e[i] = a[i]; }(exports, /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -43,6 +43,8 @@
 /******/ ([
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 
 	module.exports = {
 	  log: __webpack_require__(1).log,
@@ -54,177 +56,182 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	module.exports = {
 	  log: __webpack_require__(2),
 	  Wit: __webpack_require__(3),
 	  interactive: __webpack_require__(45)
-	}
-
+	};
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
-	
-	const DEBUG = 'debug';
-	const INFO  = 'info';
-	const WARN  = 'warn';
-	const ERROR = 'error';
-	
-	const levels = [DEBUG, INFO, WARN, ERROR];
-	const funcs = {
-	  [DEBUG]: console.error.bind(console, '[wit][debug]'),
-	  [INFO]: console.log.bind(console, '[wit]'),
-	  [WARN]: console.warn.bind(console, '[wit]'),
-	  [ERROR]: console.error.bind(console, '[wit]'),
-	};
-	const noop = () => {}
-	
-	const Logger = function(lvl) {
+
+	var _funcs;
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var DEBUG = 'debug';
+	var INFO = 'info';
+	var WARN = 'warn';
+	var ERROR = 'error';
+
+	var levels = [DEBUG, INFO, WARN, ERROR];
+	var funcs = (_funcs = {}, _defineProperty(_funcs, DEBUG, console.error.bind(console, '[wit][debug]')), _defineProperty(_funcs, INFO, console.log.bind(console, '[wit]')), _defineProperty(_funcs, WARN, console.warn.bind(console, '[wit]')), _defineProperty(_funcs, ERROR, console.error.bind(console, '[wit]')), _funcs);
+	var noop = function noop() {};
+
+	var Logger = function Logger(lvl) {
+	  var _this = this;
+
 	  this.level = lvl || INFO;
-	
-	  levels.forEach((x) => {
-	    const should = levels.indexOf(x) >= levels.indexOf(lvl);
-	    this[x] = should ? funcs[x] : noop;
+
+	  levels.forEach(function (x) {
+	    var should = levels.indexOf(x) >= levels.indexOf(lvl);
+	    _this[x] = should ? funcs[x] : noop;
 	  });
 	};
-	
-	module.exports = { Logger, DEBUG, INFO, WARN, ERROR };
 
+	module.exports = { Logger: Logger, DEBUG: DEBUG, INFO: INFO, WARN: WARN, ERROR: ERROR };
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	const {
-	  DEFAULT_API_VERSION,
-	  DEFAULT_MAX_STEPS,
-	  DEFAULT_WIT_URL
-	} = __webpack_require__(4);
-	const fetch = __webpack_require__(5);
-	const log = __webpack_require__(2);
-	const uuid = __webpack_require__(43);
-	
-	const learnMore = 'Learn more at https://wit.ai/docs/quickstart';
-	
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _require = __webpack_require__(4),
+	    DEFAULT_API_VERSION = _require.DEFAULT_API_VERSION,
+	    DEFAULT_MAX_STEPS = _require.DEFAULT_MAX_STEPS,
+	    DEFAULT_WIT_URL = _require.DEFAULT_WIT_URL;
+
+	var fetch = __webpack_require__(5);
+	var log = __webpack_require__(2);
+	var uuid = __webpack_require__(43);
+
+	var learnMore = 'Learn more at https://wit.ai/docs/quickstart';
+
 	function Wit(opts) {
+	  var _this = this;
+
 	  if (!(this instanceof Wit)) {
 	    return new Wit(opts);
 	  }
-	
-	  const {
-	    accessToken, apiVersion, actions, headers, logger, witURL
-	  } = this.config = Object.freeze(validate(opts));
-	
+
+	  var _config = this.config = Object.freeze(validate(opts)),
+	      accessToken = _config.accessToken,
+	      apiVersion = _config.apiVersion,
+	      actions = _config.actions,
+	      headers = _config.headers,
+	      logger = _config.logger,
+	      witURL = _config.witURL;
+
 	  this._sessions = {};
-	
-	  this.message = (message, context) => {
-	    let qs = 'q=' + encodeURIComponent(message);
+
+	  this.message = function (message, context) {
+	    var qs = 'q=' + encodeURIComponent(message);
 	    if (context) {
 	      qs += '&context=' + encodeURIComponent(JSON.stringify(context));
 	    }
-	    const method = 'GET';
-	    const fullURL = witURL + '/message?' + qs
-	    const handler = makeWitResponseHandler(logger, 'message');
+	    var method = 'GET';
+	    var fullURL = witURL + '/message?' + qs;
+	    var handler = makeWitResponseHandler(logger, 'message');
 	    logger.debug(method, fullURL);
 	    return fetch(fullURL, {
-	      method,
-	      headers,
-	    })
-	    .then(response => Promise.all([response.json(), response.status]))
-	    .then(handler)
-	    ;
+	      method: method,
+	      headers: headers
+	    }).then(function (response) {
+	      return Promise.all([response.json(), response.status]);
+	    }).then(handler);
 	  };
-	
-	  this.converse = (sessionId, message, context, reset) => {
-	    let qs = 'session_id=' + encodeURIComponent(sessionId);
+
+	  this.converse = function (sessionId, message, context, reset) {
+	    var qs = 'session_id=' + encodeURIComponent(sessionId);
 	    if (message) {
 	      qs += '&q=' + encodeURIComponent(message);
 	    }
 	    if (reset) {
 	      qs += '&reset=true';
 	    }
-	    const method = 'POST';
-	    const fullURL = witURL + '/converse?' + qs;
-	    const handler = makeWitResponseHandler(logger, 'converse');
+	    var method = 'POST';
+	    var fullURL = witURL + '/converse?' + qs;
+	    var handler = makeWitResponseHandler(logger, 'converse');
 	    logger.debug(method, fullURL);
 	    return fetch(fullURL, {
-	      method,
-	      headers,
-	      body: JSON.stringify(context),
-	    })
-	    .then(response => Promise.all([response.json(), response.status]))
-	    .then(handler)
-	    ;
+	      method: method,
+	      headers: headers,
+	      body: JSON.stringify(context)
+	    }).then(function (response) {
+	      return Promise.all([response.json(), response.status]);
+	    }).then(handler);
 	  };
-	
-	  const continueRunActions = (sessionId, currentRequest, message, prevContext, i) => {
-	    return (json) => {
+
+	  var continueRunActions = function continueRunActions(sessionId, currentRequest, message, prevContext, i) {
+	    return function (json) {
 	      if (i < 0) {
 	        logger.warn('Max steps reached, stopping.');
 	        return prevContext;
 	      }
-	      if (currentRequest !== this._sessions[sessionId]) {
+	      if (currentRequest !== _this._sessions[sessionId]) {
 	        return prevContext;
 	      }
 	      if (!json.type) {
 	        throw new Error('Couldn\'t find type in Wit response');
 	      }
-	
+
 	      logger.debug('Context: ' + JSON.stringify(prevContext));
 	      logger.debug('Response type: ' + json.type);
-	
+
 	      // backwards-compatibility with API version 20160516
 	      if (json.type === 'merge') {
 	        json.type = 'action';
 	        json.action = 'merge';
 	      }
-	
+
 	      if (json.type === 'error') {
 	        throw new Error('Oops, I don\'t know what to do.');
 	      }
-	
+
 	      if (json.type === 'stop') {
 	        return prevContext;
 	      }
-	
-	      const request = {
-	        sessionId,
+
+	      var request = {
+	        sessionId: sessionId,
 	        context: clone(prevContext),
 	        text: message,
-	        entities: json.entities,
+	        entities: json.entities
 	      };
-	
+
 	      if (json.type === 'msg') {
 	        throwIfActionMissing(actions, 'send');
-	        const response = {
+	        var response = {
 	          text: json.msg,
-	          quickreplies: json.quickreplies,
+	          quickreplies: json.quickreplies
 	        };
-	        return actions.send(request, response).then(ctx => {
+	        return actions.send(request, response).then(function (ctx) {
 	          if (ctx) {
 	            throw new Error('Cannot update context after \'send\' action');
 	          }
-	          if (currentRequest !== this._sessions[sessionId]) {
+	          if (currentRequest !== _this._sessions[sessionId]) {
 	            return ctx;
 	          }
-	          return this.converse(sessionId, null, prevContext).then(
-	            continueRunActions(sessionId, currentRequest, message, prevContext, i - 1)
-	          );
+	          return _this.converse(sessionId, null, prevContext).then(continueRunActions(sessionId, currentRequest, message, prevContext, i - 1));
 	        });
 	      } else if (json.type === 'action') {
 	        throwIfActionMissing(actions, json.action);
-	        return actions[json.action](request).then(ctx => {
-	          const nextContext = ctx || {};
-	          if (currentRequest !== this._sessions[sessionId]) {
+	        return actions[json.action](request).then(function (ctx) {
+	          var nextContext = ctx || {};
+	          if (currentRequest !== _this._sessions[sessionId]) {
 	            return nextContext;
 	          }
-	          return this.converse(sessionId, null, nextContext).then(
-	            continueRunActions(sessionId, currentRequest, message, nextContext, i - 1)
-	          );
+	          return _this.converse(sessionId, null, nextContext).then(continueRunActions(sessionId, currentRequest, message, nextContext, i - 1));
 	        });
 	      } else {
 	        logger.debug('unknown response type ' + json.type);
@@ -232,69 +239,71 @@
 	      }
 	    };
 	  };
-	
-	  this.runActions = function(sessionId, message, context, maxSteps) {
+
+	  this.runActions = function (sessionId, message, context, maxSteps) {
+	    var _this2 = this;
+
 	    if (!actions) throwMustHaveActions();
-	    const steps = maxSteps ? maxSteps : DEFAULT_MAX_STEPS;
-	
+	    var steps = maxSteps ? maxSteps : DEFAULT_MAX_STEPS;
+
 	    // Figuring out whether we need to reset the last turn.
 	    // Each new call increments an index for the session.
 	    // We only care about the last call to runActions.
 	    // All the previous ones are discarded (preemptive exit).
-	    const currentRequest = (this._sessions[sessionId] || 0) + 1;
+	    var currentRequest = (this._sessions[sessionId] || 0) + 1;
 	    this._sessions[sessionId] = currentRequest;
-	    const cleanup = ctx => {
-	      if (currentRequest === this._sessions[sessionId]) {
-	        delete this._sessions[sessionId];
+	    var cleanup = function cleanup(ctx) {
+	      if (currentRequest === _this2._sessions[sessionId]) {
+	        delete _this2._sessions[sessionId];
 	      }
 	      return ctx;
 	    };
-	
-	    return this.converse(sessionId, message, context, currentRequest > 1).then(
-	      continueRunActions(sessionId, currentRequest, message, context, steps)
-	    ).then(cleanup);
+
+	    return this.converse(sessionId, message, context, currentRequest > 1).then(continueRunActions(sessionId, currentRequest, message, context, steps)).then(cleanup);
 	  };
 	};
-	
-	const makeWitResponseHandler = (logger, endpoint) => {
-	  return rsp => {
-	    const error = err => {
+
+	var makeWitResponseHandler = function makeWitResponseHandler(logger, endpoint) {
+	  return function (rsp) {
+	    var error = function error(err) {
 	      logger.error('[' + endpoint + '] Error: ' + err);
 	      throw err;
 	    };
-	
+
 	    if (rsp instanceof Error) {
 	      return error(rsp);
 	    }
-	
-	    const [json, status] = rsp;
-	
+
+	    var _rsp = _slicedToArray(rsp, 2),
+	        json = _rsp[0],
+	        status = _rsp[1];
+
 	    if (json instanceof Error) {
 	      return error(json);
 	    }
-	
-	    const err = json.error || status !== 200 && json.body + ' (' + status + ')';
-	
+
+	    var err = json.error || status !== 200 && json.body + ' (' + status + ')';
+
 	    if (err) {
 	      return error(err);
 	    }
-	
+
 	    logger.debug('[' + endpoint + '] Response: ' + JSON.stringify(json));
 	    return json;
-	  }
+	  };
 	};
-	
-	const throwMustHaveActions = () => {
-	  throw new Error('You must provide the `actions` parameter to be able to use runActions. ' + learnMore)
+
+	var throwMustHaveActions = function throwMustHaveActions() {
+	  throw new Error('You must provide the `actions` parameter to be able to use runActions. ' + learnMore);
 	};
-	
-	const throwIfActionMissing = (actions, action) => {
+
+	var throwIfActionMissing = function throwIfActionMissing(actions, action) {
 	  if (!actions[action]) {
 	    throw new Error('No \'' + action + '\' action found.');
 	  }
 	};
-	
-	const validate = (opts) => {
+
+	var validate = function validate(opts) {
 	  if (!opts.accessToken) {
 	    throw new Error('Could not find access token, learn more at https://wit.ai/docs');
 	  }
@@ -303,36 +312,33 @@
 	  opts.headers = opts.headers || {
 	    'Authorization': 'Bearer ' + opts.accessToken,
 	    'Accept': 'application/vnd.wit.' + opts.apiVersion + '+json',
-	    'Content-Type': 'application/json',
+	    'Content-Type': 'application/json'
 	  };
 	  opts.logger = opts.logger || new log.Logger(log.INFO);
 	  if (opts.actions) {
 	    opts.actions = validateActions(opts.logger, opts.actions);
 	  }
-	
+
 	  return opts;
 	};
-	
-	const validateActions = (logger, actions) => {
-	  if (typeof actions !== 'object') {
+
+	var validateActions = function validateActions(logger, actions) {
+	  if ((typeof actions === 'undefined' ? 'undefined' : _typeof(actions)) !== 'object') {
 	    throw new Error('Actions should be an object. ' + learnMore);
 	  }
 	  if (!actions.send) {
 	    throw new Error('The \'send\' action is missing. ' + learnMore);
 	  }
-	
-	  Object.keys(actions).forEach(key => {
+
+	  Object.keys(actions).forEach(function (key) {
 	    if (typeof actions[key] !== 'function') {
 	      logger.warn('The \'' + key + '\' action should be a function.');
 	    }
-	
-	    if (key === 'say' && actions[key].length > 2 ||
-	      key === 'merge' && actions[key].length > 2 ||
-	      key === 'error' && actions[key].length > 2
-	    ) {
+
+	    if (key === 'say' && actions[key].length > 2 || key === 'merge' && actions[key].length > 2 || key === 'error' && actions[key].length > 2) {
 	      logger.warn('The \'' + key + '\' action has been deprecated. ' + learnMore);
 	    }
-	
+
 	    if (key === 'send') {
 	      if (actions[key].length !== 2) {
 	        logger.warn('The \'send\' action should accept 2 arguments: request and response. ' + learnMore);
@@ -341,32 +347,39 @@
 	      logger.warn('The \'' + key + '\' action should accept 1 argument: request. ' + learnMore);
 	    }
 	  });
-	
+
 	  return actions;
 	};
-	
-	const clone = (obj) => {
-	  if (obj !== null && typeof obj === 'object') {
+
+	var clone = function clone(obj) {
+	  if (obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object') {
 	    if (Array.isArray(obj)) {
 	      return obj.map(clone);
 	    } else {
-	      const newObj = {};
-	      Object.keys(obj).forEach(k => {
-	        newObj[k] = clone(obj[k]);
-	      });
-	      return newObj;
+	      var _ret = function () {
+	        var newObj = {};
+	        Object.keys(obj).forEach(function (k) {
+	          newObj[k] = clone(obj[k]);
+	        });
+	        return {
+	          v: newObj
+	        };
+	      }();
+
+	      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	    }
 	  } else {
 	    return obj;
 	  }
 	};
-	
-	module.exports = Wit;
 
+	module.exports = Wit;
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
+
+	'use strict';
 
 	module.exports = {
 	  DEFAULT_API_VERSION: '20160516',
@@ -374,21 +387,20 @@
 	  DEFAULT_WIT_URL: 'https://api.wit.ai'
 	};
 
-
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	
+
 	var realFetch = __webpack_require__(6);
-	module.exports = function(url, options) {
+	module.exports = function (url, options) {
 		if (/^\/\//.test(url)) {
 			url = 'https:' + url;
 		}
 		return realFetch.call(this, url, options);
 	};
-	
+
 	if (!global.fetch) {
 		global.fetch = module.exports;
 		global.Response = realFetch.Response;
@@ -396,36 +408,38 @@
 		global.Request = realFetch.Request;
 	}
 
-
 /***/ },
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	/**
 	 * index.js
 	 *
 	 * a request API compatible with window.fetch
 	 */
-	
+
 	var parse_url = __webpack_require__(7).parse;
 	var resolve_url = __webpack_require__(7).resolve;
 	var http = __webpack_require__(8);
 	var https = __webpack_require__(9);
 	var zlib = __webpack_require__(10);
 	var stream = __webpack_require__(11);
-	
+
 	var Body = __webpack_require__(12);
 	var Response = __webpack_require__(40);
 	var Headers = __webpack_require__(41);
 	var Request = __webpack_require__(42);
 	var FetchError = __webpack_require__(38);
-	
+
 	// commonjs
 	module.exports = Fetch;
 	// es6 default export compatibility
 	module.exports.default = module.exports;
-	
+
 	/**
 	 * Fetch class
 	 *
@@ -434,163 +448,160 @@
 	 * @return  Promise
 	 */
 	function Fetch(url, opts) {
-	
+
 		// allow call as function
-		if (!(this instanceof Fetch))
-			return new Fetch(url, opts);
-	
+		if (!(this instanceof Fetch)) return new Fetch(url, opts);
+
 		// allow custom promise
 		if (!Fetch.Promise) {
 			throw new Error('native promise missing, set Fetch.Promise to your favorite alternative');
 		}
-	
+
 		Body.Promise = Fetch.Promise;
-	
+
 		var self = this;
-	
+
 		// wrap http.request into fetch
-		return new Fetch.Promise(function(resolve, reject) {
+		return new Fetch.Promise(function (resolve, reject) {
 			// build request object
 			var options = new Request(url, opts);
-	
+
 			if (!options.protocol || !options.hostname) {
 				throw new Error('only absolute urls are supported');
 			}
-	
+
 			if (options.protocol !== 'http:' && options.protocol !== 'https:') {
 				throw new Error('only http(s) protocols are supported');
 			}
-	
+
 			var send;
 			if (options.protocol === 'https:') {
 				send = https.request;
 			} else {
 				send = http.request;
 			}
-	
+
 			// normalize headers
 			var headers = new Headers(options.headers);
-	
+
 			if (options.compress) {
 				headers.set('accept-encoding', 'gzip,deflate');
 			}
-	
+
 			if (!headers.has('user-agent')) {
 				headers.set('user-agent', 'node-fetch/1.0 (+https://github.com/bitinn/node-fetch)');
 			}
-	
+
 			if (!headers.has('connection') && !options.agent) {
 				headers.set('connection', 'close');
 			}
-	
+
 			if (!headers.has('accept')) {
 				headers.set('accept', '*/*');
 			}
-	
+
 			// detect form data input from form-data module, this hack avoid the need to pass multipart header manually
 			if (!headers.has('content-type') && options.body && typeof options.body.getBoundary === 'function') {
 				headers.set('content-type', 'multipart/form-data; boundary=' + options.body.getBoundary());
 			}
-	
+
 			// bring node-fetch closer to browser behavior by setting content-length automatically
 			if (!headers.has('content-length') && /post|put|patch|delete/i.test(options.method)) {
 				if (typeof options.body === 'string') {
 					headers.set('content-length', Buffer.byteLength(options.body));
-				// detect form data input from form-data module, this hack avoid the need to add content-length header manually
+					// detect form data input from form-data module, this hack avoid the need to add content-length header manually
 				} else if (options.body && typeof options.body.getLengthSync === 'function') {
 					// for form-data 1.x
 					if (options.body._lengthRetrievers && options.body._lengthRetrievers.length == 0) {
 						headers.set('content-length', options.body.getLengthSync().toString());
-					// for form-data 2.x
+						// for form-data 2.x
 					} else if (options.body.hasKnownLength && options.body.hasKnownLength()) {
 						headers.set('content-length', options.body.getLengthSync().toString());
 					}
-				// this is only necessary for older nodejs releases (before iojs merge)
+					// this is only necessary for older nodejs releases (before iojs merge)
 				} else if (options.body === undefined || options.body === null) {
 					headers.set('content-length', '0');
 				}
 			}
-	
+
 			options.headers = headers.raw();
-	
+
 			// http.request only support string as host header, this hack make custom host header possible
 			if (options.headers.host) {
 				options.headers.host = options.headers.host[0];
 			}
-	
+
 			// send request
 			var req = send(options);
 			var reqTimeout;
-	
+
 			if (options.timeout) {
-				req.once('socket', function(socket) {
-					reqTimeout = setTimeout(function() {
+				req.once('socket', function (socket) {
+					reqTimeout = setTimeout(function () {
 						req.abort();
 						reject(new FetchError('network timeout at: ' + options.url, 'request-timeout'));
 					}, options.timeout);
 				});
 			}
-	
-			req.on('error', function(err) {
+
+			req.on('error', function (err) {
 				clearTimeout(reqTimeout);
 				reject(new FetchError('request to ' + options.url + ' failed, reason: ' + err.message, 'system', err));
 			});
-	
-			req.on('response', function(res) {
+
+			req.on('response', function (res) {
 				clearTimeout(reqTimeout);
-	
+
 				// handle redirect
 				if (self.isRedirect(res.statusCode) && options.redirect !== 'manual') {
 					if (options.redirect === 'error') {
 						reject(new FetchError('redirect mode is set to error: ' + options.url, 'no-redirect'));
 						return;
 					}
-	
+
 					if (options.counter >= options.follow) {
 						reject(new FetchError('maximum redirect reached at: ' + options.url, 'max-redirect'));
 						return;
 					}
-	
+
 					if (!res.headers.location) {
 						reject(new FetchError('redirect location header missing at: ' + options.url, 'invalid-redirect'));
 						return;
 					}
-	
+
 					// per fetch spec, for POST request with 301/302 response, or any request with 303 response, use GET when following redirect
-					if (res.statusCode === 303
-						|| ((res.statusCode === 301 || res.statusCode === 302) && options.method === 'POST'))
-					{
+					if (res.statusCode === 303 || (res.statusCode === 301 || res.statusCode === 302) && options.method === 'POST') {
 						options.method = 'GET';
 						delete options.body;
 						delete options.headers['content-length'];
 					}
-	
+
 					options.counter++;
-	
+
 					resolve(Fetch(resolve_url(options.url, res.headers.location), options));
 					return;
 				}
-	
+
 				// normalize location header for manual redirect mode
 				var headers = new Headers(res.headers);
 				if (options.redirect === 'manual' && headers.has('location')) {
 					headers.set('location', resolve_url(options.url, headers.get('location')));
 				}
-	
+
 				// prepare response
 				var body = res.pipe(new stream.PassThrough());
 				var response_options = {
-					url: options.url
-					, status: res.statusCode
-					, statusText: res.statusMessage
-					, headers: headers
-					, size: options.size
-					, timeout: options.timeout
+					url: options.url,
+					status: res.statusCode,
+					statusText: res.statusMessage,
+					headers: headers,
+					size: options.size,
+					timeout: options.timeout
 				};
-	
+
 				// response object
 				var output;
-	
+
 				// in following scenarios we ignore compression support
 				// 1. compression support is disabled
 				// 2. HEAD request
@@ -602,23 +613,23 @@
 					resolve(output);
 					return;
 				}
-	
+
 				// otherwise, check for gzip or deflate
 				var name = headers.get('content-encoding');
-	
+
 				// for gzip
 				if (name == 'gzip' || name == 'x-gzip') {
 					body = body.pipe(zlib.createGunzip());
 					output = new Response(body, response_options);
 					resolve(output);
 					return;
-	
-				// for deflate
+
+					// for deflate
 				} else if (name == 'deflate' || name == 'x-deflate') {
 					// handle the infamous raw deflate response from old servers
 					// a hack for old IIS and Apache servers
 					var raw = res.pipe(new stream.PassThrough());
-					raw.once('data', function(chunk) {
+					raw.once('data', function (chunk) {
 						// see http://stackoverflow.com/questions/37519828
 						if ((chunk[0] & 0x0F) === 0x08) {
 							body = body.pipe(zlib.createInflate());
@@ -630,13 +641,13 @@
 					});
 					return;
 				}
-	
+
 				// otherwise, use response as-is
 				output = new Response(body, response_options);
 				resolve(output);
 				return;
 			});
-	
+
 			// accept string, buffer or readable stream as body
 			// per spec we will call tostring on non-stream objects
 			if (typeof options.body === 'string') {
@@ -644,35 +655,33 @@
 				req.end();
 			} else if (options.body instanceof Buffer) {
 				req.write(options.body);
-				req.end()
-			} else if (typeof options.body === 'object' && options.body.pipe) {
+				req.end();
+			} else if (_typeof(options.body) === 'object' && options.body.pipe) {
 				options.body.pipe(req);
-			} else if (typeof options.body === 'object') {
+			} else if (_typeof(options.body) === 'object') {
 				req.write(options.body.toString());
 				req.end();
 			} else {
 				req.end();
 			}
 		});
-	
 	};
-	
+
 	/**
 	 * Redirect code matching
 	 *
 	 * @param   Number   code  Status code
 	 * @return  Boolean
 	 */
-	Fetch.prototype.isRedirect = function(code) {
+	Fetch.prototype.isRedirect = function (code) {
 		return code === 301 || code === 302 || code === 303 || code === 307 || code === 308;
-	}
-	
+	};
+
 	// expose Promise
 	Fetch.Promise = global.Promise;
 	Fetch.Response = Response;
 	Fetch.Headers = Headers;
 	Fetch.Request = Request;
-
 
 /***/ },
 /* 7 */
@@ -708,20 +717,21 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	'use strict';
+
 	/**
 	 * body.js
 	 *
 	 * Body interface provides common methods for Request and Response
 	 */
-	
+
 	var convert = __webpack_require__(13).convert;
 	var bodyStream = __webpack_require__(37);
 	var PassThrough = __webpack_require__(11).PassThrough;
 	var FetchError = __webpack_require__(38);
-	
+
 	module.exports = Body;
-	
+
 	/**
 	 * Body class
 	 *
@@ -730,136 +740,131 @@
 	 * @return  Void
 	 */
 	function Body(body, opts) {
-	
+
 		opts = opts || {};
-	
+
 		this.body = body;
 		this.bodyUsed = false;
 		this.size = opts.size || 0;
 		this.timeout = opts.timeout || 0;
 		this._raw = [];
 		this._abort = false;
-	
 	}
-	
+
 	/**
 	 * Decode response as json
 	 *
 	 * @return  Promise
 	 */
-	Body.prototype.json = function() {
-	
+	Body.prototype.json = function () {
+
 		// for 204 No Content response, buffer will be empty, parsing it will throw error
 		if (this.status === 204) {
 			return Body.Promise.resolve({});
 		}
-	
-		return this._decode().then(function(buffer) {
+
+		return this._decode().then(function (buffer) {
 			return JSON.parse(buffer.toString());
 		});
-	
 	};
-	
+
 	/**
 	 * Decode response as text
 	 *
 	 * @return  Promise
 	 */
-	Body.prototype.text = function() {
-	
-		return this._decode().then(function(buffer) {
+	Body.prototype.text = function () {
+
+		return this._decode().then(function (buffer) {
 			return buffer.toString();
 		});
-	
 	};
-	
+
 	/**
 	 * Decode response as buffer (non-spec api)
 	 *
 	 * @return  Promise
 	 */
-	Body.prototype.buffer = function() {
-	
+	Body.prototype.buffer = function () {
+
 		return this._decode();
-	
 	};
-	
+
 	/**
 	 * Decode buffers into utf-8 string
 	 *
 	 * @return  Promise
 	 */
-	Body.prototype._decode = function() {
-	
+	Body.prototype._decode = function () {
+
 		var self = this;
-	
+
 		if (this.bodyUsed) {
 			return Body.Promise.reject(new Error('body used already for: ' + this.url));
 		}
-	
+
 		this.bodyUsed = true;
 		this._bytes = 0;
 		this._abort = false;
 		this._raw = [];
-	
-		return new Body.Promise(function(resolve, reject) {
+
+		return new Body.Promise(function (resolve, reject) {
 			var resTimeout;
-	
+
 			// body is string
 			if (typeof self.body === 'string') {
 				self._bytes = self.body.length;
 				self._raw = [new Buffer(self.body)];
 				return resolve(self._convert());
 			}
-	
+
 			// body is buffer
 			if (self.body instanceof Buffer) {
 				self._bytes = self.body.length;
 				self._raw = [self.body];
 				return resolve(self._convert());
 			}
-	
+
 			// allow timeout on slow response body
 			if (self.timeout) {
-				resTimeout = setTimeout(function() {
+				resTimeout = setTimeout(function () {
 					self._abort = true;
 					reject(new FetchError('response timeout at ' + self.url + ' over limit: ' + self.timeout, 'body-timeout'));
 				}, self.timeout);
 			}
-	
+
 			// handle stream error, such as incorrect content-encoding
-			self.body.on('error', function(err) {
+			self.body.on('error', function (err) {
 				reject(new FetchError('invalid response body at: ' + self.url + ' reason: ' + err.message, 'system', err));
 			});
-	
+
 			// body is stream
-			self.body.on('data', function(chunk) {
+			self.body.on('data', function (chunk) {
 				if (self._abort || chunk === null) {
 					return;
 				}
-	
+
 				if (self.size && self._bytes + chunk.length > self.size) {
 					self._abort = true;
 					reject(new FetchError('content size at ' + self.url + ' over limit: ' + self.size, 'max-size'));
 					return;
 				}
-	
+
 				self._bytes += chunk.length;
 				self._raw.push(chunk);
 			});
-	
-			self.body.on('end', function() {
+
+			self.body.on('end', function () {
 				if (self._abort) {
 					return;
 				}
-	
+
 				clearTimeout(resTimeout);
 				resolve(self._convert());
 			});
 		});
-	
 	};
-	
+
 	/**
 	 * Detect buffer encoding and convert to target encoding
 	 * ref: http://www.w3.org/TR/2011/WD-html5-20110113/parsing.html#determining-the-character-encoding
@@ -867,89 +872,84 @@
 	 * @param   String  encoding  Target encoding
 	 * @return  String
 	 */
-	Body.prototype._convert = function(encoding) {
-	
+	Body.prototype._convert = function (encoding) {
+
 		encoding = encoding || 'utf-8';
-	
+
 		var ct = this.headers.get('content-type');
 		var charset = 'utf-8';
 		var res, str;
-	
+
 		// header
 		if (ct) {
 			// skip encoding detection altogether if not html/xml/plain text
 			if (!/text\/html|text\/plain|\+xml|\/xml/i.test(ct)) {
 				return Buffer.concat(this._raw);
 			}
-	
+
 			res = /charset=([^;]*)/i.exec(ct);
 		}
-	
+
 		// no charset in content type, peek at response body for at most 1024 bytes
 		if (!res && this._raw.length > 0) {
 			for (var i = 0; i < this._raw.length; i++) {
-				str += this._raw[i].toString()
+				str += this._raw[i].toString();
 				if (str.length > 1024) {
 					break;
 				}
 			}
 			str = str.substr(0, 1024);
 		}
-	
+
 		// html5
 		if (!res && str) {
 			res = /<meta.+?charset=(['"])(.+?)\1/i.exec(str);
 		}
-	
+
 		// html4
 		if (!res && str) {
 			res = /<meta[\s]+?http-equiv=(['"])content-type\1[\s]+?content=(['"])(.+?)\2/i.exec(str);
-	
+
 			if (res) {
 				res = /charset=(.*)/i.exec(res.pop());
 			}
 		}
-	
+
 		// xml
 		if (!res && str) {
 			res = /<\?xml.+?encoding=(['"])(.+?)\1/i.exec(str);
 		}
-	
+
 		// found charset
 		if (res) {
 			charset = res.pop();
-	
+
 			// prevent decode issues when sites use incorrect encoding
 			// ref: https://hsivonen.fi/encoding-menu/
 			if (charset === 'gb2312' || charset === 'gbk') {
 				charset = 'gb18030';
 			}
 		}
-	
+
 		// turn raw buffers into a single utf-8 buffer
-		return convert(
-			Buffer.concat(this._raw)
-			, encoding
-			, charset
-		);
-	
+		return convert(Buffer.concat(this._raw), encoding, charset);
 	};
-	
+
 	/**
 	 * Clone body given Res/Req instance
 	 *
 	 * @param   Mixed  instance  Response or Request instance
 	 * @return  Mixed
 	 */
-	Body.prototype._clone = function(instance) {
+	Body.prototype._clone = function (instance) {
 		var p1, p2;
 		var body = instance.body;
-	
+
 		// don't allow cloning a used body
 		if (instance.bodyUsed) {
 			throw new Error('cannot clone body after it is used');
 		}
-	
+
 		// check that body is a stream and not form-data object
 		// note: we can't clone the form-data object without having it as a dependency
 		if (bodyStream(body) && typeof body.getBoundary !== 'function') {
@@ -962,28 +962,27 @@
 			instance.body = p1;
 			body = p2;
 		}
-	
+
 		return body;
-	}
-	
+	};
+
 	// expose Promise
 	Body.Promise = global.Promise;
-
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
+
 	var iconvLite = __webpack_require__(14);
 	// Load Iconv from an external file to be able to disable Iconv for webpack
 	// Add /\/iconv-loader$/ to webpack.IgnorePlugin to ignore it
 	var Iconv = __webpack_require__(1);
-	
+
 	// Expose to the world
 	module.exports.convert = convert;
-	
+
 	/**
 	 * Convert encoding of an UTF-8 string or a buffer
 	 *
@@ -997,13 +996,13 @@
 	    from = checkEncoding(from || 'UTF-8');
 	    to = checkEncoding(to || 'UTF-8');
 	    str = str || '';
-	
+
 	    var result;
-	
+
 	    if (from !== 'UTF-8' && typeof str === 'string') {
 	        str = new Buffer(str, 'binary');
 	    }
-	
+
 	    if (from === to) {
 	        if (typeof str === 'string') {
 	            result = new Buffer(str);
@@ -1030,15 +1029,14 @@
 	            result = str;
 	        }
 	    }
-	
-	
+
 	    if (typeof result === 'string') {
 	        result = new Buffer(result, 'utf-8');
 	    }
-	
+
 	    return result;
 	}
-	
+
 	/**
 	 * Convert encoding of a string with node-iconv (if available)
 	 *
@@ -1053,7 +1051,7 @@
 	    response = iconv.convert(str);
 	    return response.slice(0, response.length);
 	}
-	
+
 	/**
 	 * Convert encoding of astring with iconv-lite
 	 *
@@ -1071,7 +1069,7 @@
 	        return iconvLite.encode(iconvLite.decode(str, from), to);
 	    }
 	}
-	
+
 	/**
 	 * Converts charset name if needed
 	 *
@@ -1079,63 +1077,58 @@
 	 * @return {String} Character set name
 	 */
 	function checkEncoding(name) {
-	    return (name || '').toString().trim().
-	    replace(/^latin[\-_]?(\d+)$/i, 'ISO-8859-$1').
-	    replace(/^win(?:dows)?[\-_]?(\d+)$/i, 'WINDOWS-$1').
-	    replace(/^utf[\-_]?(\d+)$/i, 'UTF-$1').
-	    replace(/^ks_c_5601\-1987$/i, 'CP949').
-	    replace(/^us[\-_]?ascii$/i, 'ASCII').
-	    toUpperCase();
+	    return (name || '').toString().trim().replace(/^latin[\-_]?(\d+)$/i, 'ISO-8859-$1').replace(/^win(?:dows)?[\-_]?(\d+)$/i, 'WINDOWS-$1').replace(/^utf[\-_]?(\d+)$/i, 'UTF-$1').replace(/^ks_c_5601\-1987$/i, 'CP949').replace(/^us[\-_]?ascii$/i, 'ASCII').toUpperCase();
 	}
-
 
 /***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var bomHandling = __webpack_require__(15),
 	    iconv = module.exports;
-	
+
 	// All codecs and aliases are kept here, keyed by encoding name/alias.
 	// They are lazy loaded in `iconv.getCodec` from `encodings/index.js`.
 	iconv.encodings = null;
-	
+
 	// Characters emitted in case of error.
 	iconv.defaultCharUnicode = '�';
 	iconv.defaultCharSingleByte = '?';
-	
+
 	// Public API.
 	iconv.encode = function encode(str, encoding, options) {
 	    str = "" + (str || ""); // Ensure string.
-	
+
 	    var encoder = iconv.getEncoder(encoding, options);
-	
+
 	    var res = encoder.write(str);
 	    var trail = encoder.end();
-	    
-	    return (trail && trail.length > 0) ? Buffer.concat([res, trail]) : res;
-	}
-	
+
+	    return trail && trail.length > 0 ? Buffer.concat([res, trail]) : res;
+	};
+
 	iconv.decode = function decode(buf, encoding, options) {
 	    if (typeof buf === 'string') {
 	        if (!iconv.skipDecodeWarning) {
 	            console.error('Iconv-lite warning: decode()-ing strings is deprecated. Refer to https://github.com/ashtuchkin/iconv-lite/wiki/Use-Buffers-when-decoding');
 	            iconv.skipDecodeWarning = true;
 	        }
-	
+
 	        buf = new Buffer("" + (buf || ""), "binary"); // Ensure buffer.
 	    }
-	
+
 	    var decoder = iconv.getDecoder(encoding, options);
-	
+
 	    var res = decoder.write(buf);
 	    var trail = decoder.end();
-	
-	    return trail ? (res + trail) : res;
-	}
-	
+
+	    return trail ? res + trail : res;
+	};
+
 	iconv.encodingExists = function encodingExists(enc) {
 	    try {
 	        iconv.getCodec(enc);
@@ -1143,222 +1136,199 @@
 	    } catch (e) {
 	        return false;
 	    }
-	}
-	
+	};
+
 	// Legacy aliases to convert functions
 	iconv.toEncoding = iconv.encode;
 	iconv.fromEncoding = iconv.decode;
-	
+
 	// Search for a codec in iconv.encodings. Cache codec data in iconv._codecDataCache.
 	iconv._codecDataCache = {};
 	iconv.getCodec = function getCodec(encoding) {
-	    if (!iconv.encodings)
-	        iconv.encodings = __webpack_require__(16); // Lazy load all encoding definitions.
-	    
+	    if (!iconv.encodings) iconv.encodings = __webpack_require__(16); // Lazy load all encoding definitions.
+
 	    // Canonicalize encoding name: strip all non-alphanumeric chars and appended year.
-	    var enc = (''+encoding).toLowerCase().replace(/[^0-9a-z]|:\d{4}$/g, "");
-	
+	    var enc = ('' + encoding).toLowerCase().replace(/[^0-9a-z]|:\d{4}$/g, "");
+
 	    // Traverse iconv.encodings to find actual codec.
 	    var codecOptions = {};
 	    while (true) {
 	        var codec = iconv._codecDataCache[enc];
-	        if (codec)
-	            return codec;
-	
+	        if (codec) return codec;
+
 	        var codecDef = iconv.encodings[enc];
-	
-	        switch (typeof codecDef) {
-	            case "string": // Direct alias to other encoding.
+
+	        switch (typeof codecDef === 'undefined' ? 'undefined' : _typeof(codecDef)) {
+	            case "string":
+	                // Direct alias to other encoding.
 	                enc = codecDef;
 	                break;
-	
-	            case "object": // Alias with options. Can be layered.
-	                for (var key in codecDef)
+
+	            case "object":
+	                // Alias with options. Can be layered.
+	                for (var key in codecDef) {
 	                    codecOptions[key] = codecDef[key];
-	
-	                if (!codecOptions.encodingName)
-	                    codecOptions.encodingName = enc;
-	                
+	                }if (!codecOptions.encodingName) codecOptions.encodingName = enc;
+
 	                enc = codecDef.type;
 	                break;
-	
-	            case "function": // Codec itself.
-	                if (!codecOptions.encodingName)
-	                    codecOptions.encodingName = enc;
-	
+
+	            case "function":
+	                // Codec itself.
+	                if (!codecOptions.encodingName) codecOptions.encodingName = enc;
+
 	                // The codec function must load all tables and return object with .encoder and .decoder methods.
 	                // It'll be called only once (for each different options object).
 	                codec = new codecDef(codecOptions, iconv);
-	
+
 	                iconv._codecDataCache[codecOptions.encodingName] = codec; // Save it to be reused later.
 	                return codec;
-	
+
 	            default:
-	                throw new Error("Encoding not recognized: '" + encoding + "' (searched as: '"+enc+"')");
+	                throw new Error("Encoding not recognized: '" + encoding + "' (searched as: '" + enc + "')");
 	        }
 	    }
-	}
-	
+	};
+
 	iconv.getEncoder = function getEncoder(encoding, options) {
 	    var codec = iconv.getCodec(encoding),
 	        encoder = new codec.encoder(options, codec);
-	
-	    if (codec.bomAware && options && options.addBOM)
-	        encoder = new bomHandling.PrependBOM(encoder, options);
-	
+
+	    if (codec.bomAware && options && options.addBOM) encoder = new bomHandling.PrependBOM(encoder, options);
+
 	    return encoder;
-	}
-	
+	};
+
 	iconv.getDecoder = function getDecoder(encoding, options) {
 	    var codec = iconv.getCodec(encoding),
 	        decoder = new codec.decoder(options, codec);
-	
-	    if (codec.bomAware && !(options && options.stripBOM === false))
-	        decoder = new bomHandling.StripBOM(decoder, options);
-	
+
+	    if (codec.bomAware && !(options && options.stripBOM === false)) decoder = new bomHandling.StripBOM(decoder, options);
+
 	    return decoder;
-	}
-	
-	
+	};
+
 	// Load extensions in Node. All of them are omitted in Browserify build via 'browser' field in package.json.
 	var nodeVer = typeof process !== 'undefined' && process.versions && process.versions.node;
 	if (nodeVer) {
-	
+
 	    // Load streaming support in Node v0.10+
 	    var nodeVerArr = nodeVer.split(".").map(Number);
 	    if (nodeVerArr[0] > 0 || nodeVerArr[1] >= 10) {
 	        __webpack_require__(34)(iconv);
 	    }
-	
+
 	    // Load Node primitive extensions.
 	    __webpack_require__(35)(iconv);
 	}
-	
-
 
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	var BOMChar = '\uFEFF';
-	
-	exports.PrependBOM = PrependBOMWrapper
+
+	exports.PrependBOM = PrependBOMWrapper;
 	function PrependBOMWrapper(encoder, options) {
 	    this.encoder = encoder;
 	    this.addBOM = true;
 	}
-	
-	PrependBOMWrapper.prototype.write = function(str) {
+
+	PrependBOMWrapper.prototype.write = function (str) {
 	    if (this.addBOM) {
 	        str = BOMChar + str;
 	        this.addBOM = false;
 	    }
-	
+
 	    return this.encoder.write(str);
-	}
-	
-	PrependBOMWrapper.prototype.end = function() {
+	};
+
+	PrependBOMWrapper.prototype.end = function () {
 	    return this.encoder.end();
-	}
-	
-	
+	};
+
 	//------------------------------------------------------------------------------
-	
+
 	exports.StripBOM = StripBOMWrapper;
 	function StripBOMWrapper(decoder, options) {
 	    this.decoder = decoder;
 	    this.pass = false;
 	    this.options = options || {};
 	}
-	
-	StripBOMWrapper.prototype.write = function(buf) {
+
+	StripBOMWrapper.prototype.write = function (buf) {
 	    var res = this.decoder.write(buf);
-	    if (this.pass || !res)
-	        return res;
-	
+	    if (this.pass || !res) return res;
+
 	    if (res[0] === BOMChar) {
 	        res = res.slice(1);
-	        if (typeof this.options.stripBOM === 'function')
-	            this.options.stripBOM();
+	        if (typeof this.options.stripBOM === 'function') this.options.stripBOM();
 	    }
-	
+
 	    this.pass = true;
 	    return res;
-	}
-	
-	StripBOMWrapper.prototype.end = function() {
-	    return this.decoder.end();
-	}
-	
+	};
 
+	StripBOMWrapper.prototype.end = function () {
+	    return this.decoder.end();
+	};
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Update this array if you add/rename/remove files in this directory.
 	// We support Browserify by skipping automatic module discovery and requiring modules directly.
-	var modules = [
-	    __webpack_require__(17),
-	    __webpack_require__(19),
-	    __webpack_require__(20),
-	    __webpack_require__(21),
-	    __webpack_require__(22),
-	    __webpack_require__(23),
-	    __webpack_require__(24),
-	    __webpack_require__(25),
-	];
-	
+
+	var modules = [__webpack_require__(17), __webpack_require__(19), __webpack_require__(20), __webpack_require__(21), __webpack_require__(22), __webpack_require__(23), __webpack_require__(24), __webpack_require__(25)];
+
 	// Put all encoding/alias/codec definitions to single object and export it. 
 	for (var i = 0; i < modules.length; i++) {
-	    var module = modules[i];
-	    for (var enc in module)
-	        if (Object.prototype.hasOwnProperty.call(module, enc))
-	            exports[enc] = module[enc];
+	    var _module = modules[i];
+	    for (var enc in _module) {
+	        if (Object.prototype.hasOwnProperty.call(_module, enc)) exports[enc] = _module[enc];
+	    }
 	}
-
 
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Export Node.js internal encodings.
-	
+
 	module.exports = {
 	    // Encodings
-	    utf8:   { type: "_internal", bomAware: true},
-	    cesu8:  { type: "_internal", bomAware: true},
+	    utf8: { type: "_internal", bomAware: true },
+	    cesu8: { type: "_internal", bomAware: true },
 	    unicode11utf8: "utf8",
-	
-	    ucs2:   { type: "_internal", bomAware: true},
+
+	    ucs2: { type: "_internal", bomAware: true },
 	    utf16le: "ucs2",
-	
+
 	    binary: { type: "_internal" },
 	    base64: { type: "_internal" },
-	    hex:    { type: "_internal" },
-	
+	    hex: { type: "_internal" },
+
 	    // Codec.
-	    _internal: InternalCodec,
+	    _internal: InternalCodec
 	};
-	
+
 	//------------------------------------------------------------------------------
-	
+
 	function InternalCodec(codecOptions, iconv) {
 	    this.enc = codecOptions.encodingName;
 	    this.bomAware = codecOptions.bomAware;
-	
-	    if (this.enc === "base64")
-	        this.encoder = InternalEncoderBase64;
-	    else if (this.enc === "cesu8") {
+
+	    if (this.enc === "base64") this.encoder = InternalEncoderBase64;else if (this.enc === "cesu8") {
 	        this.enc = "utf8"; // Use utf8 for decoding.
 	        this.encoder = InternalEncoderCesu8;
-	
+
 	        // Add decoder for versions of Node not supporting CESU-8
 	        if (new Buffer("eda080", 'hex').toString().length == 3) {
 	            this.decoder = InternalDecoderCesu8;
@@ -1366,154 +1336,151 @@
 	        }
 	    }
 	}
-	
+
 	InternalCodec.prototype.encoder = InternalEncoder;
 	InternalCodec.prototype.decoder = InternalDecoder;
-	
+
 	//------------------------------------------------------------------------------
-	
+
 	// We use node.js internal decoder. Its signature is the same as ours.
 	var StringDecoder = __webpack_require__(18).StringDecoder;
-	
+
 	if (!StringDecoder.prototype.end) // Node v0.8 doesn't have this method.
-	    StringDecoder.prototype.end = function() {};
-	
-	
+	    StringDecoder.prototype.end = function () {};
+
 	function InternalDecoder(options, codec) {
 	    StringDecoder.call(this, codec.enc);
 	}
-	
+
 	InternalDecoder.prototype = StringDecoder.prototype;
-	
-	
+
 	//------------------------------------------------------------------------------
 	// Encoder is mostly trivial
-	
+
 	function InternalEncoder(options, codec) {
 	    this.enc = codec.enc;
 	}
-	
-	InternalEncoder.prototype.write = function(str) {
+
+	InternalEncoder.prototype.write = function (str) {
 	    return new Buffer(str, this.enc);
-	}
-	
-	InternalEncoder.prototype.end = function() {
-	}
-	
-	
+	};
+
+	InternalEncoder.prototype.end = function () {};
+
 	//------------------------------------------------------------------------------
 	// Except base64 encoder, which must keep its state.
-	
+
 	function InternalEncoderBase64(options, codec) {
 	    this.prevStr = '';
 	}
-	
-	InternalEncoderBase64.prototype.write = function(str) {
+
+	InternalEncoderBase64.prototype.write = function (str) {
 	    str = this.prevStr + str;
-	    var completeQuads = str.length - (str.length % 4);
+	    var completeQuads = str.length - str.length % 4;
 	    this.prevStr = str.slice(completeQuads);
 	    str = str.slice(0, completeQuads);
-	
+
 	    return new Buffer(str, "base64");
-	}
-	
-	InternalEncoderBase64.prototype.end = function() {
+	};
+
+	InternalEncoderBase64.prototype.end = function () {
 	    return new Buffer(this.prevStr, "base64");
-	}
-	
-	
+	};
+
 	//------------------------------------------------------------------------------
 	// CESU-8 encoder is also special.
-	
-	function InternalEncoderCesu8(options, codec) {
-	}
-	
-	InternalEncoderCesu8.prototype.write = function(str) {
-	    var buf = new Buffer(str.length * 3), bufIdx = 0;
+
+	function InternalEncoderCesu8(options, codec) {}
+
+	InternalEncoderCesu8.prototype.write = function (str) {
+	    var buf = new Buffer(str.length * 3),
+	        bufIdx = 0;
 	    for (var i = 0; i < str.length; i++) {
 	        var charCode = str.charCodeAt(i);
 	        // Naive implementation, but it works because CESU-8 is especially easy
 	        // to convert from UTF-16 (which all JS strings are encoded in).
-	        if (charCode < 0x80)
-	            buf[bufIdx++] = charCode;
-	        else if (charCode < 0x800) {
+	        if (charCode < 0x80) buf[bufIdx++] = charCode;else if (charCode < 0x800) {
 	            buf[bufIdx++] = 0xC0 + (charCode >>> 6);
 	            buf[bufIdx++] = 0x80 + (charCode & 0x3f);
-	        }
-	        else { // charCode will always be < 0x10000 in javascript.
+	        } else {
+	            // charCode will always be < 0x10000 in javascript.
 	            buf[bufIdx++] = 0xE0 + (charCode >>> 12);
-	            buf[bufIdx++] = 0x80 + ((charCode >>> 6) & 0x3f);
+	            buf[bufIdx++] = 0x80 + (charCode >>> 6 & 0x3f);
 	            buf[bufIdx++] = 0x80 + (charCode & 0x3f);
 	        }
 	    }
 	    return buf.slice(0, bufIdx);
-	}
-	
-	InternalEncoderCesu8.prototype.end = function() {
-	}
-	
+	};
+
+	InternalEncoderCesu8.prototype.end = function () {};
+
 	//------------------------------------------------------------------------------
 	// CESU-8 decoder is not implemented in Node v4.0+
-	
+
 	function InternalDecoderCesu8(options, codec) {
 	    this.acc = 0;
 	    this.contBytes = 0;
 	    this.accBytes = 0;
 	    this.defaultCharUnicode = codec.defaultCharUnicode;
 	}
-	
-	InternalDecoderCesu8.prototype.write = function(buf) {
-	    var acc = this.acc, contBytes = this.contBytes, accBytes = this.accBytes, 
+
+	InternalDecoderCesu8.prototype.write = function (buf) {
+	    var acc = this.acc,
+	        contBytes = this.contBytes,
+	        accBytes = this.accBytes,
 	        res = '';
 	    for (var i = 0; i < buf.length; i++) {
 	        var curByte = buf[i];
-	        if ((curByte & 0xC0) !== 0x80) { // Leading byte
-	            if (contBytes > 0) { // Previous code is invalid
+	        if ((curByte & 0xC0) !== 0x80) {
+	            // Leading byte
+	            if (contBytes > 0) {
+	                // Previous code is invalid
 	                res += this.defaultCharUnicode;
 	                contBytes = 0;
 	            }
-	
-	            if (curByte < 0x80) { // Single-byte code
+
+	            if (curByte < 0x80) {
+	                // Single-byte code
 	                res += String.fromCharCode(curByte);
-	            } else if (curByte < 0xE0) { // Two-byte code
+	            } else if (curByte < 0xE0) {
+	                // Two-byte code
 	                acc = curByte & 0x1F;
-	                contBytes = 1; accBytes = 1;
-	            } else if (curByte < 0xF0) { // Three-byte code
+	                contBytes = 1;accBytes = 1;
+	            } else if (curByte < 0xF0) {
+	                // Three-byte code
 	                acc = curByte & 0x0F;
-	                contBytes = 2; accBytes = 1;
-	            } else { // Four or more are not supported for CESU-8.
+	                contBytes = 2;accBytes = 1;
+	            } else {
+	                // Four or more are not supported for CESU-8.
 	                res += this.defaultCharUnicode;
 	            }
-	        } else { // Continuation byte
-	            if (contBytes > 0) { // We're waiting for it.
-	                acc = (acc << 6) | (curByte & 0x3f);
-	                contBytes--; accBytes++;
+	        } else {
+	            // Continuation byte
+	            if (contBytes > 0) {
+	                // We're waiting for it.
+	                acc = acc << 6 | curByte & 0x3f;
+	                contBytes--;accBytes++;
 	                if (contBytes === 0) {
 	                    // Check for overlong encoding, but support Modified UTF-8 (encoding NULL as C0 80)
-	                    if (accBytes === 2 && acc < 0x80 && acc > 0)
-	                        res += this.defaultCharUnicode;
-	                    else if (accBytes === 3 && acc < 0x800)
-	                        res += this.defaultCharUnicode;
-	                    else
+	                    if (accBytes === 2 && acc < 0x80 && acc > 0) res += this.defaultCharUnicode;else if (accBytes === 3 && acc < 0x800) res += this.defaultCharUnicode;else
 	                        // Actually add character.
 	                        res += String.fromCharCode(acc);
 	                }
-	            } else { // Unexpected continuation byte
+	            } else {
+	                // Unexpected continuation byte
 	                res += this.defaultCharUnicode;
 	            }
 	        }
 	    }
-	    this.acc = acc; this.contBytes = contBytes; this.accBytes = accBytes;
+	    this.acc = acc;this.contBytes = contBytes;this.accBytes = accBytes;
 	    return res;
-	}
-	
-	InternalDecoderCesu8.prototype.end = function() {
-	    var res = 0;
-	    if (this.contBytes > 0)
-	        res += this.defaultCharUnicode;
-	    return res;
-	}
+	};
 
+	InternalDecoderCesu8.prototype.end = function () {
+	    var res = 0;
+	    if (this.contBytes > 0) res += this.defaultCharUnicode;
+	    return res;
+	};
 
 /***/ },
 /* 18 */
@@ -1525,304 +1492,285 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// == UTF16-BE codec. ==========================================================
-	
+
 	exports.utf16be = Utf16BECodec;
-	function Utf16BECodec() {
-	}
-	
+	function Utf16BECodec() {}
+
 	Utf16BECodec.prototype.encoder = Utf16BEEncoder;
 	Utf16BECodec.prototype.decoder = Utf16BEDecoder;
 	Utf16BECodec.prototype.bomAware = true;
-	
-	
+
 	// -- Encoding
-	
-	function Utf16BEEncoder() {
-	}
-	
-	Utf16BEEncoder.prototype.write = function(str) {
+
+	function Utf16BEEncoder() {}
+
+	Utf16BEEncoder.prototype.write = function (str) {
 	    var buf = new Buffer(str, 'ucs2');
 	    for (var i = 0; i < buf.length; i += 2) {
-	        var tmp = buf[i]; buf[i] = buf[i+1]; buf[i+1] = tmp;
+	        var tmp = buf[i];buf[i] = buf[i + 1];buf[i + 1] = tmp;
 	    }
 	    return buf;
-	}
-	
-	Utf16BEEncoder.prototype.end = function() {
-	}
-	
-	
+	};
+
+	Utf16BEEncoder.prototype.end = function () {};
+
 	// -- Decoding
-	
+
 	function Utf16BEDecoder() {
 	    this.overflowByte = -1;
 	}
-	
-	Utf16BEDecoder.prototype.write = function(buf) {
-	    if (buf.length == 0)
-	        return '';
-	
+
+	Utf16BEDecoder.prototype.write = function (buf) {
+	    if (buf.length == 0) return '';
+
 	    var buf2 = new Buffer(buf.length + 1),
-	        i = 0, j = 0;
-	
+	        i = 0,
+	        j = 0;
+
 	    if (this.overflowByte !== -1) {
 	        buf2[0] = buf[0];
 	        buf2[1] = this.overflowByte;
-	        i = 1; j = 2;
+	        i = 1;j = 2;
 	    }
-	
-	    for (; i < buf.length-1; i += 2, j+= 2) {
-	        buf2[j] = buf[i+1];
-	        buf2[j+1] = buf[i];
+
+	    for (; i < buf.length - 1; i += 2, j += 2) {
+	        buf2[j] = buf[i + 1];
+	        buf2[j + 1] = buf[i];
 	    }
-	
-	    this.overflowByte = (i == buf.length-1) ? buf[buf.length-1] : -1;
-	
+
+	    this.overflowByte = i == buf.length - 1 ? buf[buf.length - 1] : -1;
+
 	    return buf2.slice(0, j).toString('ucs2');
-	}
-	
-	Utf16BEDecoder.prototype.end = function() {
-	}
-	
-	
+	};
+
+	Utf16BEDecoder.prototype.end = function () {};
+
 	// == UTF-16 codec =============================================================
 	// Decoder chooses automatically from UTF-16LE and UTF-16BE using BOM and space-based heuristic.
 	// Defaults to UTF-16LE, as it's prevalent and default in Node.
 	// http://en.wikipedia.org/wiki/UTF-16 and http://encoding.spec.whatwg.org/#utf-16le
 	// Decoder default can be changed: iconv.decode(buf, 'utf16', {defaultEncoding: 'utf-16be'});
-	
+
 	// Encoder uses UTF-16LE and prepends BOM (which can be overridden with addBOM: false).
-	
+
 	exports.utf16 = Utf16Codec;
 	function Utf16Codec(codecOptions, iconv) {
 	    this.iconv = iconv;
 	}
-	
+
 	Utf16Codec.prototype.encoder = Utf16Encoder;
 	Utf16Codec.prototype.decoder = Utf16Decoder;
-	
-	
+
 	// -- Encoding (pass-through)
-	
+
 	function Utf16Encoder(options, codec) {
 	    options = options || {};
-	    if (options.addBOM === undefined)
-	        options.addBOM = true;
+	    if (options.addBOM === undefined) options.addBOM = true;
 	    this.encoder = codec.iconv.getEncoder('utf-16le', options);
 	}
-	
-	Utf16Encoder.prototype.write = function(str) {
+
+	Utf16Encoder.prototype.write = function (str) {
 	    return this.encoder.write(str);
-	}
-	
-	Utf16Encoder.prototype.end = function() {
+	};
+
+	Utf16Encoder.prototype.end = function () {
 	    return this.encoder.end();
-	}
-	
-	
+	};
+
 	// -- Decoding
-	
+
 	function Utf16Decoder(options, codec) {
 	    this.decoder = null;
 	    this.initialBytes = [];
 	    this.initialBytesLen = 0;
-	
+
 	    this.options = options || {};
 	    this.iconv = codec.iconv;
 	}
-	
-	Utf16Decoder.prototype.write = function(buf) {
+
+	Utf16Decoder.prototype.write = function (buf) {
 	    if (!this.decoder) {
 	        // Codec is not chosen yet. Accumulate initial bytes.
 	        this.initialBytes.push(buf);
 	        this.initialBytesLen += buf.length;
-	        
+
 	        if (this.initialBytesLen < 16) // We need more bytes to use space heuristic (see below)
 	            return '';
-	
+
 	        // We have enough bytes -> detect endianness.
 	        var buf = Buffer.concat(this.initialBytes),
 	            encoding = detectEncoding(buf, this.options.defaultEncoding);
 	        this.decoder = this.iconv.getDecoder(encoding, this.options);
 	        this.initialBytes.length = this.initialBytesLen = 0;
 	    }
-	
+
 	    return this.decoder.write(buf);
-	}
-	
-	Utf16Decoder.prototype.end = function() {
+	};
+
+	Utf16Decoder.prototype.end = function () {
 	    if (!this.decoder) {
 	        var buf = Buffer.concat(this.initialBytes),
 	            encoding = detectEncoding(buf, this.options.defaultEncoding);
 	        this.decoder = this.iconv.getDecoder(encoding, this.options);
-	
+
 	        var res = this.decoder.write(buf),
 	            trail = this.decoder.end();
-	
-	        return trail ? (res + trail) : res;
+
+	        return trail ? res + trail : res;
 	    }
 	    return this.decoder.end();
-	}
-	
+	};
+
 	function detectEncoding(buf, defaultEncoding) {
 	    var enc = defaultEncoding || 'utf-16le';
-	
+
 	    if (buf.length >= 2) {
 	        // Check BOM.
 	        if (buf[0] == 0xFE && buf[1] == 0xFF) // UTF-16BE BOM
-	            enc = 'utf-16be';
-	        else if (buf[0] == 0xFF && buf[1] == 0xFE) // UTF-16LE BOM
-	            enc = 'utf-16le';
-	        else {
+	            enc = 'utf-16be';else if (buf[0] == 0xFF && buf[1] == 0xFE) // UTF-16LE BOM
+	            enc = 'utf-16le';else {
 	            // No BOM found. Try to deduce encoding from initial content.
 	            // Most of the time, the content has ASCII chars (U+00**), but the opposite (U+**00) is uncommon.
 	            // So, we count ASCII as if it was LE or BE, and decide from that.
-	            var asciiCharsLE = 0, asciiCharsBE = 0, // Counts of chars in both positions
-	                _len = Math.min(buf.length - (buf.length % 2), 64); // Len is always even.
-	
+	            var asciiCharsLE = 0,
+	                asciiCharsBE = 0,
+	                // Counts of chars in both positions
+	            _len = Math.min(buf.length - buf.length % 2, 64); // Len is always even.
+
 	            for (var i = 0; i < _len; i += 2) {
-	                if (buf[i] === 0 && buf[i+1] !== 0) asciiCharsBE++;
-	                if (buf[i] !== 0 && buf[i+1] === 0) asciiCharsLE++;
+	                if (buf[i] === 0 && buf[i + 1] !== 0) asciiCharsBE++;
+	                if (buf[i] !== 0 && buf[i + 1] === 0) asciiCharsLE++;
 	            }
-	
-	            if (asciiCharsBE > asciiCharsLE)
-	                enc = 'utf-16be';
-	            else if (asciiCharsBE < asciiCharsLE)
-	                enc = 'utf-16le';
+
+	            if (asciiCharsBE > asciiCharsLE) enc = 'utf-16be';else if (asciiCharsBE < asciiCharsLE) enc = 'utf-16le';
 	        }
 	    }
-	
+
 	    return enc;
 	}
-	
-	
-
 
 /***/ },
 /* 20 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// UTF-7 codec, according to https://tools.ietf.org/html/rfc2152
 	// See also below a UTF-7-IMAP codec, according to http://tools.ietf.org/html/rfc3501#section-5.1.3
-	
+
 	exports.utf7 = Utf7Codec;
 	exports.unicode11utf7 = 'utf7'; // Alias UNICODE-1-1-UTF-7
 	function Utf7Codec(codecOptions, iconv) {
 	    this.iconv = iconv;
 	};
-	
+
 	Utf7Codec.prototype.encoder = Utf7Encoder;
 	Utf7Codec.prototype.decoder = Utf7Decoder;
 	Utf7Codec.prototype.bomAware = true;
-	
-	
+
 	// -- Encoding
-	
+
 	var nonDirectChars = /[^A-Za-z0-9'\(\),-\.\/:\? \n\r\t]+/g;
-	
+
 	function Utf7Encoder(options, codec) {
 	    this.iconv = codec.iconv;
 	}
-	
-	Utf7Encoder.prototype.write = function(str) {
+
+	Utf7Encoder.prototype.write = function (str) {
 	    // Naive implementation.
 	    // Non-direct chars are encoded as "+<base64>-"; single "+" char is encoded as "+-".
-	    return new Buffer(str.replace(nonDirectChars, function(chunk) {
-	        return "+" + (chunk === '+' ? '' : 
-	            this.iconv.encode(chunk, 'utf16-be').toString('base64').replace(/=+$/, '')) 
-	            + "-";
+	    return new Buffer(str.replace(nonDirectChars, function (chunk) {
+	        return "+" + (chunk === '+' ? '' : this.iconv.encode(chunk, 'utf16-be').toString('base64').replace(/=+$/, '')) + "-";
 	    }.bind(this)));
-	}
-	
-	Utf7Encoder.prototype.end = function() {
-	}
-	
-	
+	};
+
+	Utf7Encoder.prototype.end = function () {};
+
 	// -- Decoding
-	
+
 	function Utf7Decoder(options, codec) {
 	    this.iconv = codec.iconv;
 	    this.inBase64 = false;
 	    this.base64Accum = '';
 	}
-	
+
 	var base64Regex = /[A-Za-z0-9\/+]/;
 	var base64Chars = [];
-	for (var i = 0; i < 256; i++)
+	for (var i = 0; i < 256; i++) {
 	    base64Chars[i] = base64Regex.test(String.fromCharCode(i));
-	
-	var plusChar = '+'.charCodeAt(0), 
+	}var plusChar = '+'.charCodeAt(0),
 	    minusChar = '-'.charCodeAt(0),
 	    andChar = '&'.charCodeAt(0);
-	
-	Utf7Decoder.prototype.write = function(buf) {
-	    var res = "", lastI = 0,
+
+	Utf7Decoder.prototype.write = function (buf) {
+	    var res = "",
+	        lastI = 0,
 	        inBase64 = this.inBase64,
 	        base64Accum = this.base64Accum;
-	
+
 	    // The decoder is more involved as we must handle chunks in stream.
-	
+
 	    for (var i = 0; i < buf.length; i++) {
-	        if (!inBase64) { // We're in direct mode.
+	        if (!inBase64) {
+	            // We're in direct mode.
 	            // Write direct chars until '+'
 	            if (buf[i] == plusChar) {
 	                res += this.iconv.decode(buf.slice(lastI, i), "ascii"); // Write direct chars.
-	                lastI = i+1;
+	                lastI = i + 1;
 	                inBase64 = true;
 	            }
-	        } else { // We decode base64.
-	            if (!base64Chars[buf[i]]) { // Base64 ended.
-	                if (i == lastI && buf[i] == minusChar) {// "+-" -> "+"
+	        } else {
+	            // We decode base64.
+	            if (!base64Chars[buf[i]]) {
+	                // Base64 ended.
+	                if (i == lastI && buf[i] == minusChar) {
+	                    // "+-" -> "+"
 	                    res += "+";
 	                } else {
 	                    var b64str = base64Accum + buf.slice(lastI, i).toString();
 	                    res += this.iconv.decode(new Buffer(b64str, 'base64'), "utf16-be");
 	                }
-	
+
 	                if (buf[i] != minusChar) // Minus is absorbed after base64.
 	                    i--;
-	
-	                lastI = i+1;
+
+	                lastI = i + 1;
 	                inBase64 = false;
 	                base64Accum = '';
 	            }
 	        }
 	    }
-	
+
 	    if (!inBase64) {
 	        res += this.iconv.decode(buf.slice(lastI), "ascii"); // Write direct chars.
 	    } else {
 	        var b64str = base64Accum + buf.slice(lastI).toString();
-	
-	        var canBeDecoded = b64str.length - (b64str.length % 8); // Minimal chunk: 2 quads -> 2x3 bytes -> 3 chars.
+
+	        var canBeDecoded = b64str.length - b64str.length % 8; // Minimal chunk: 2 quads -> 2x3 bytes -> 3 chars.
 	        base64Accum = b64str.slice(canBeDecoded); // The rest will be decoded in future.
 	        b64str = b64str.slice(0, canBeDecoded);
-	
+
 	        res += this.iconv.decode(new Buffer(b64str, 'base64'), "utf16-be");
 	    }
-	
+
 	    this.inBase64 = inBase64;
 	    this.base64Accum = base64Accum;
-	
+
 	    return res;
-	}
-	
-	Utf7Decoder.prototype.end = function() {
+	};
+
+	Utf7Decoder.prototype.end = function () {
 	    var res = "";
-	    if (this.inBase64 && this.base64Accum.length > 0)
-	        res = this.iconv.decode(new Buffer(this.base64Accum, 'base64'), "utf16-be");
-	
+	    if (this.inBase64 && this.base64Accum.length > 0) res = this.iconv.decode(new Buffer(this.base64Accum, 'base64'), "utf16-be");
+
 	    this.inBase64 = false;
 	    this.base64Accum = '';
 	    return res;
-	}
-	
-	
+	};
+
 	// UTF-7-IMAP codec.
 	// RFC3501 Sec. 5.1.3 Modified UTF-7 (http://tools.ietf.org/html/rfc3501#section-5.1.3)
 	// Differences:
@@ -1833,54 +1781,55 @@
 	//  * No implicit shift back from Base64 (should always end with '-')
 	//  * String must end in non-shifted position.
 	//  * "-&" while in base64 is not allowed.
-	
-	
+
+
 	exports.utf7imap = Utf7IMAPCodec;
 	function Utf7IMAPCodec(codecOptions, iconv) {
 	    this.iconv = iconv;
 	};
-	
+
 	Utf7IMAPCodec.prototype.encoder = Utf7IMAPEncoder;
 	Utf7IMAPCodec.prototype.decoder = Utf7IMAPDecoder;
 	Utf7IMAPCodec.prototype.bomAware = true;
-	
-	
+
 	// -- Encoding
-	
+
 	function Utf7IMAPEncoder(options, codec) {
 	    this.iconv = codec.iconv;
 	    this.inBase64 = false;
 	    this.base64Accum = new Buffer(6);
 	    this.base64AccumIdx = 0;
 	}
-	
-	Utf7IMAPEncoder.prototype.write = function(str) {
+
+	Utf7IMAPEncoder.prototype.write = function (str) {
 	    var inBase64 = this.inBase64,
 	        base64Accum = this.base64Accum,
 	        base64AccumIdx = this.base64AccumIdx,
-	        buf = new Buffer(str.length*5 + 10), bufIdx = 0;
-	
+	        buf = new Buffer(str.length * 5 + 10),
+	        bufIdx = 0;
+
 	    for (var i = 0; i < str.length; i++) {
 	        var uChar = str.charCodeAt(i);
-	        if (0x20 <= uChar && uChar <= 0x7E) { // Direct character or '&'.
+	        if (0x20 <= uChar && uChar <= 0x7E) {
+	            // Direct character or '&'.
 	            if (inBase64) {
 	                if (base64AccumIdx > 0) {
 	                    bufIdx += buf.write(base64Accum.slice(0, base64AccumIdx).toString('base64').replace(/\//g, ',').replace(/=+$/, ''), bufIdx);
 	                    base64AccumIdx = 0;
 	                }
-	
+
 	                buf[bufIdx++] = minusChar; // Write '-', then go to direct mode.
 	                inBase64 = false;
 	            }
-	
+
 	            if (!inBase64) {
 	                buf[bufIdx++] = uChar; // Write direct character
-	
-	                if (uChar === andChar)  // Ampersand -> '&-'
+
+	                if (uChar === andChar) // Ampersand -> '&-'
 	                    buf[bufIdx++] = minusChar;
 	            }
-	
-	        } else { // Non-direct character
+	        } else {
+	            // Non-direct character
 	            if (!inBase64) {
 	                buf[bufIdx++] = andChar; // Write '&', then go to base64 mode.
 	                inBase64 = true;
@@ -1888,7 +1837,7 @@
 	            if (inBase64) {
 	                base64Accum[base64AccumIdx++] = uChar >> 8;
 	                base64Accum[base64AccumIdx++] = uChar & 0xFF;
-	
+
 	                if (base64AccumIdx == base64Accum.length) {
 	                    bufIdx += buf.write(base64Accum.toString('base64').replace(/\//g, ','), bufIdx);
 	                    base64AccumIdx = 0;
@@ -1896,192 +1845,185 @@
 	            }
 	        }
 	    }
-	
+
 	    this.inBase64 = inBase64;
 	    this.base64AccumIdx = base64AccumIdx;
-	
+
 	    return buf.slice(0, bufIdx);
-	}
-	
-	Utf7IMAPEncoder.prototype.end = function() {
-	    var buf = new Buffer(10), bufIdx = 0;
+	};
+
+	Utf7IMAPEncoder.prototype.end = function () {
+	    var buf = new Buffer(10),
+	        bufIdx = 0;
 	    if (this.inBase64) {
 	        if (this.base64AccumIdx > 0) {
 	            bufIdx += buf.write(this.base64Accum.slice(0, this.base64AccumIdx).toString('base64').replace(/\//g, ',').replace(/=+$/, ''), bufIdx);
 	            this.base64AccumIdx = 0;
 	        }
-	
+
 	        buf[bufIdx++] = minusChar; // Write '-', then go to direct mode.
 	        this.inBase64 = false;
 	    }
-	
+
 	    return buf.slice(0, bufIdx);
-	}
-	
-	
+	};
+
 	// -- Decoding
-	
+
 	function Utf7IMAPDecoder(options, codec) {
 	    this.iconv = codec.iconv;
 	    this.inBase64 = false;
 	    this.base64Accum = '';
 	}
-	
+
 	var base64IMAPChars = base64Chars.slice();
 	base64IMAPChars[','.charCodeAt(0)] = true;
-	
-	Utf7IMAPDecoder.prototype.write = function(buf) {
-	    var res = "", lastI = 0,
+
+	Utf7IMAPDecoder.prototype.write = function (buf) {
+	    var res = "",
+	        lastI = 0,
 	        inBase64 = this.inBase64,
 	        base64Accum = this.base64Accum;
-	
+
 	    // The decoder is more involved as we must handle chunks in stream.
 	    // It is forgiving, closer to standard UTF-7 (for example, '-' is optional at the end).
-	
+
 	    for (var i = 0; i < buf.length; i++) {
-	        if (!inBase64) { // We're in direct mode.
+	        if (!inBase64) {
+	            // We're in direct mode.
 	            // Write direct chars until '&'
 	            if (buf[i] == andChar) {
 	                res += this.iconv.decode(buf.slice(lastI, i), "ascii"); // Write direct chars.
-	                lastI = i+1;
+	                lastI = i + 1;
 	                inBase64 = true;
 	            }
-	        } else { // We decode base64.
-	            if (!base64IMAPChars[buf[i]]) { // Base64 ended.
-	                if (i == lastI && buf[i] == minusChar) { // "&-" -> "&"
+	        } else {
+	            // We decode base64.
+	            if (!base64IMAPChars[buf[i]]) {
+	                // Base64 ended.
+	                if (i == lastI && buf[i] == minusChar) {
+	                    // "&-" -> "&"
 	                    res += "&";
 	                } else {
 	                    var b64str = base64Accum + buf.slice(lastI, i).toString().replace(/,/g, '/');
 	                    res += this.iconv.decode(new Buffer(b64str, 'base64'), "utf16-be");
 	                }
-	
+
 	                if (buf[i] != minusChar) // Minus may be absorbed after base64.
 	                    i--;
-	
-	                lastI = i+1;
+
+	                lastI = i + 1;
 	                inBase64 = false;
 	                base64Accum = '';
 	            }
 	        }
 	    }
-	
+
 	    if (!inBase64) {
 	        res += this.iconv.decode(buf.slice(lastI), "ascii"); // Write direct chars.
 	    } else {
 	        var b64str = base64Accum + buf.slice(lastI).toString().replace(/,/g, '/');
-	
-	        var canBeDecoded = b64str.length - (b64str.length % 8); // Minimal chunk: 2 quads -> 2x3 bytes -> 3 chars.
+
+	        var canBeDecoded = b64str.length - b64str.length % 8; // Minimal chunk: 2 quads -> 2x3 bytes -> 3 chars.
 	        base64Accum = b64str.slice(canBeDecoded); // The rest will be decoded in future.
 	        b64str = b64str.slice(0, canBeDecoded);
-	
+
 	        res += this.iconv.decode(new Buffer(b64str, 'base64'), "utf16-be");
 	    }
-	
+
 	    this.inBase64 = inBase64;
 	    this.base64Accum = base64Accum;
-	
+
 	    return res;
-	}
-	
-	Utf7IMAPDecoder.prototype.end = function() {
+	};
+
+	Utf7IMAPDecoder.prototype.end = function () {
 	    var res = "";
-	    if (this.inBase64 && this.base64Accum.length > 0)
-	        res = this.iconv.decode(new Buffer(this.base64Accum, 'base64'), "utf16-be");
-	
+	    if (this.inBase64 && this.base64Accum.length > 0) res = this.iconv.decode(new Buffer(this.base64Accum, 'base64'), "utf16-be");
+
 	    this.inBase64 = false;
 	    this.base64Accum = '';
 	    return res;
-	}
-	
-	
-
+	};
 
 /***/ },
 /* 21 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Single-byte codec. Needs a 'chars' string parameter that contains 256 or 128 chars that
 	// correspond to encoded bytes (if 128 - then lower half is ASCII). 
-	
+
 	exports._sbcs = SBCSCodec;
 	function SBCSCodec(codecOptions, iconv) {
-	    if (!codecOptions)
-	        throw new Error("SBCS codec is called without the data.")
-	    
+	    if (!codecOptions) throw new Error("SBCS codec is called without the data.");
+
 	    // Prepare char buffer for decoding.
-	    if (!codecOptions.chars || (codecOptions.chars.length !== 128 && codecOptions.chars.length !== 256))
-	        throw new Error("Encoding '"+codecOptions.type+"' has incorrect 'chars' (must be of len 128 or 256)");
-	    
+	    if (!codecOptions.chars || codecOptions.chars.length !== 128 && codecOptions.chars.length !== 256) throw new Error("Encoding '" + codecOptions.type + "' has incorrect 'chars' (must be of len 128 or 256)");
+
 	    if (codecOptions.chars.length === 128) {
 	        var asciiString = "";
-	        for (var i = 0; i < 128; i++)
+	        for (var i = 0; i < 128; i++) {
 	            asciiString += String.fromCharCode(i);
-	        codecOptions.chars = asciiString + codecOptions.chars;
+	        }codecOptions.chars = asciiString + codecOptions.chars;
 	    }
-	
+
 	    this.decodeBuf = new Buffer(codecOptions.chars, 'ucs2');
-	    
+
 	    // Encoding buffer.
 	    var encodeBuf = new Buffer(65536);
 	    encodeBuf.fill(iconv.defaultCharSingleByte.charCodeAt(0));
-	
-	    for (var i = 0; i < codecOptions.chars.length; i++)
+
+	    for (var i = 0; i < codecOptions.chars.length; i++) {
 	        encodeBuf[codecOptions.chars.charCodeAt(i)] = i;
-	
-	    this.encodeBuf = encodeBuf;
+	    }this.encodeBuf = encodeBuf;
 	}
-	
+
 	SBCSCodec.prototype.encoder = SBCSEncoder;
 	SBCSCodec.prototype.decoder = SBCSDecoder;
-	
-	
+
 	function SBCSEncoder(options, codec) {
 	    this.encodeBuf = codec.encodeBuf;
 	}
-	
-	SBCSEncoder.prototype.write = function(str) {
+
+	SBCSEncoder.prototype.write = function (str) {
 	    var buf = new Buffer(str.length);
-	    for (var i = 0; i < str.length; i++)
+	    for (var i = 0; i < str.length; i++) {
 	        buf[i] = this.encodeBuf[str.charCodeAt(i)];
-	    
-	    return buf;
-	}
-	
-	SBCSEncoder.prototype.end = function() {
-	}
-	
-	
+	    }return buf;
+	};
+
+	SBCSEncoder.prototype.end = function () {};
+
 	function SBCSDecoder(options, codec) {
 	    this.decodeBuf = codec.decodeBuf;
 	}
-	
-	SBCSDecoder.prototype.write = function(buf) {
+
+	SBCSDecoder.prototype.write = function (buf) {
 	    // Strings are immutable in JS -> we use ucs2 buffer to speed up computations.
 	    var decodeBuf = this.decodeBuf;
-	    var newBuf = new Buffer(buf.length*2);
-	    var idx1 = 0, idx2 = 0;
+	    var newBuf = new Buffer(buf.length * 2);
+	    var idx1 = 0,
+	        idx2 = 0;
 	    for (var i = 0; i < buf.length; i++) {
-	        idx1 = buf[i]*2; idx2 = i*2;
+	        idx1 = buf[i] * 2;idx2 = i * 2;
 	        newBuf[idx2] = decodeBuf[idx1];
-	        newBuf[idx2+1] = decodeBuf[idx1+1];
+	        newBuf[idx2 + 1] = decodeBuf[idx1 + 1];
 	    }
 	    return newBuf.toString('ucs2');
-	}
-	
-	SBCSDecoder.prototype.end = function() {
-	}
+	};
 
+	SBCSDecoder.prototype.end = function () {};
 
 /***/ },
 /* 22 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Manually added data to be used by sbcs codec in addition to generated one.
-	
+
 	module.exports = {
 	    // Not supported by iconv, not sure why.
 	    "10029": "maccenteuro",
@@ -2089,14 +2031,14 @@
 	        "type": "_sbcs",
 	        "chars": "ÄĀāÉĄÖÜáąČäčĆćéŹźĎíďĒēĖóėôöõúĚěü†°Ę£§•¶ß®©™ę¨≠ģĮįĪ≤≥īĶ∂∑łĻļĽľĹĺŅņŃ¬√ńŇ∆«»… ňŐÕőŌ–—“”‘’÷◊ōŔŕŘ‹›řŖŗŠ‚„šŚśÁŤťÍŽžŪÓÔūŮÚůŰűŲųÝýķŻŁżĢˇ"
 	    },
-	
+
 	    "808": "cp808",
 	    "ibm808": "cp808",
 	    "cp808": {
 	        "type": "_sbcs",
 	        "chars": "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмноп░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀рстуфхцчшщъыьэюяЁёЄєЇїЎў°∙·√№€■ "
 	    },
-	
+
 	    // Aliases of generated encodings.
 	    "ascii8bit": "ascii",
 	    "usascii": "ascii",
@@ -2110,7 +2052,7 @@
 	    "iso646us": "ascii",
 	    "iso646irv": "ascii",
 	    "us": "ascii",
-	
+
 	    "latin1": "iso88591",
 	    "latin2": "iso88592",
 	    "latin3": "iso88593",
@@ -2121,18 +2063,18 @@
 	    "latin8": "iso885914",
 	    "latin9": "iso885915",
 	    "latin10": "iso885916",
-	
+
 	    "csisolatin1": "iso88591",
 	    "csisolatin2": "iso88592",
 	    "csisolatin3": "iso88593",
 	    "csisolatin4": "iso88594",
 	    "csisolatincyrillic": "iso88595",
 	    "csisolatinarabic": "iso88596",
-	    "csisolatingreek" : "iso88597",
+	    "csisolatingreek": "iso88597",
 	    "csisolatinhebrew": "iso88598",
 	    "csisolatin5": "iso88599",
 	    "csisolatin6": "iso885910",
-	
+
 	    "l1": "iso88591",
 	    "l2": "iso88592",
 	    "l3": "iso88593",
@@ -2143,7 +2085,7 @@
 	    "l8": "iso885914",
 	    "l9": "iso885915",
 	    "l10": "iso885916",
-	
+
 	    "isoir14": "iso646jp",
 	    "isoir57": "iso646cn",
 	    "isoir100": "iso88591",
@@ -2161,52 +2103,52 @@
 	    "isoir199": "iso885914",
 	    "isoir203": "iso885915",
 	    "isoir226": "iso885916",
-	
+
 	    "cp819": "iso88591",
 	    "ibm819": "iso88591",
-	
+
 	    "cyrillic": "iso88595",
-	
+
 	    "arabic": "iso88596",
 	    "arabic8": "iso88596",
 	    "ecma114": "iso88596",
 	    "asmo708": "iso88596",
-	
-	    "greek" : "iso88597",
-	    "greek8" : "iso88597",
-	    "ecma118" : "iso88597",
-	    "elot928" : "iso88597",
-	
+
+	    "greek": "iso88597",
+	    "greek8": "iso88597",
+	    "ecma118": "iso88597",
+	    "elot928": "iso88597",
+
 	    "hebrew": "iso88598",
 	    "hebrew8": "iso88598",
-	
+
 	    "turkish": "iso88599",
 	    "turkish8": "iso88599",
-	
+
 	    "thai": "iso885911",
 	    "thai8": "iso885911",
-	
+
 	    "celtic": "iso885914",
 	    "celtic8": "iso885914",
 	    "isoceltic": "iso885914",
-	
+
 	    "tis6200": "tis620",
 	    "tis62025291": "tis620",
 	    "tis62025330": "tis620",
-	
+
 	    "10000": "macroman",
 	    "10006": "macgreek",
 	    "10007": "maccyrillic",
 	    "10079": "maciceland",
 	    "10081": "macturkish",
-	
+
 	    "cspc8codepage437": "cp437",
 	    "cspc775baltic": "cp775",
 	    "cspc850multilingual": "cp850",
 	    "cspcp852": "cp852",
 	    "cspc862latinhebrew": "cp862",
 	    "cpgr": "cp869",
-	
+
 	    "msee": "cp1250",
 	    "mscyrl": "cp1251",
 	    "msansi": "cp1252",
@@ -2215,47 +2157,46 @@
 	    "mshebr": "cp1255",
 	    "msarab": "cp1256",
 	    "winbaltrim": "cp1257",
-	
+
 	    "cp20866": "koi8r",
 	    "20866": "koi8r",
 	    "ibm878": "koi8r",
 	    "cskoi8r": "koi8r",
-	
+
 	    "cp21866": "koi8u",
 	    "21866": "koi8u",
 	    "ibm1168": "koi8u",
-	
+
 	    "strk10482002": "rk1048",
-	
+
 	    "tcvn5712": "tcvn",
 	    "tcvn57121": "tcvn",
-	
+
 	    "gb198880": "iso646cn",
 	    "cn": "iso646cn",
-	
+
 	    "csiso14jisc6220ro": "iso646jp",
 	    "jisc62201969ro": "iso646jp",
 	    "jp": "iso646jp",
-	
+
 	    "cshproman8": "hproman8",
 	    "r8": "hproman8",
 	    "roman8": "hproman8",
 	    "xroman8": "hproman8",
 	    "ibm1051": "hproman8",
-	
-	    "mac": "macintosh",
-	    "csmacintosh": "macintosh",
-	};
-	
 
+	    "mac": "macintosh",
+	    "csmacintosh": "macintosh"
+	};
 
 /***/ },
 /* 23 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Generated data for sbcs codec. Don't edit manually. Regenerate using generation/gen-sbcs.js script.
+
 	module.exports = {
 	  "437": "cp437",
 	  "737": "cp737",
@@ -2523,7 +2464,7 @@
 	  "csibm863": "cp863",
 	  "cp864": {
 	    "type": "_sbcs",
-	    "chars": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$٪&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~°·∙√▒─│┼┤┬├┴┐┌└┘β∞φ±½¼≈«»ﻷﻸ��ﻻﻼ� ­ﺂ£¤ﺄ��ﺎﺏﺕﺙ،ﺝﺡﺥ٠١٢٣٤٥٦٧٨٩ﻑ؛ﺱﺵﺹ؟¢ﺀﺁﺃﺅﻊﺋﺍﺑﺓﺗﺛﺟﺣﺧﺩﺫﺭﺯﺳﺷﺻﺿﻁﻅﻋﻏ¦¬÷×ﻉـﻓﻗﻛﻟﻣﻧﻫﻭﻯﻳﺽﻌﻎﻍﻡﹽّﻥﻩﻬﻰﻲﻐﻕﻵﻶﻝﻙﻱ■�"
+	    "chars": "\0\x01\x02\x03\x04\x05\x06\x07\b\t\n\x0B\f\r\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F !\"#$\u066A&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7F\xB0\xB7\u2219\u221A\u2592\u2500\u2502\u253C\u2524\u252C\u251C\u2534\u2510\u250C\u2514\u2518\u03B2\u221E\u03C6\xB1\xBD\xBC\u2248\xAB\xBB\uFEF7\uFEF8\uFFFD\uFFFD\uFEFB\uFEFC\uFFFD\xA0\xAD\uFE82\xA3\xA4\uFE84\uFFFD\uFFFD\uFE8E\uFE8F\uFE95\uFE99\u060C\uFE9D\uFEA1\uFEA5\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669\uFED1\u061B\uFEB1\uFEB5\uFEB9\u061F\xA2\uFE80\uFE81\uFE83\uFE85\uFECA\uFE8B\uFE8D\uFE91\uFE93\uFE97\uFE9B\uFE9F\uFEA3\uFEA7\uFEA9\uFEAB\uFEAD\uFEAF\uFEB3\uFEB7\uFEBB\uFEBF\uFEC1\uFEC5\uFECB\uFECF\xA6\xAC\xF7\xD7\uFEC9\u0640\uFED3\uFED7\uFEDB\uFEDF\uFEE3\uFEE7\uFEEB\uFEED\uFEEF\uFEF3\uFEBD\uFECC\uFECE\uFECD\uFEE1\uFE7D\u0651\uFEE5\uFEE9\uFEEC\uFEF0\uFEF2\uFED0\uFED5\uFEF5\uFEF6\uFEDD\uFED9\uFEF1\u25A0\uFFFD"
 	  },
 	  "ibm864": "cp864",
 	  "csibm864": "cp864",
@@ -2661,7 +2602,7 @@
 	  },
 	  "tcvn": {
 	    "type": "_sbcs",
-	    "chars": "\u0000ÚỤ\u0003ỪỬỮ\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010ỨỰỲỶỸÝỴ\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÀẢÃÁẠẶẬÈẺẼÉẸỆÌỈĨÍỊÒỎÕÓỌỘỜỞỠỚỢÙỦŨ ĂÂÊÔƠƯĐăâêôơưđẶ̀̀̉̃́àảãáạẲằẳẵắẴẮẦẨẪẤỀặầẩẫấậèỂẻẽéẹềểễếệìỉỄẾỒĩíịòỔỏõóọồổỗốộờởỡớợùỖủũúụừửữứựỳỷỹýỵỐ"
+	    "chars": "\0\xDA\u1EE4\x03\u1EEA\u1EEC\u1EEE\x07\b\t\n\x0B\f\r\x0E\x0F\x10\u1EE8\u1EF0\u1EF2\u1EF6\u1EF8\xDD\u1EF4\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7F\xC0\u1EA2\xC3\xC1\u1EA0\u1EB6\u1EAC\xC8\u1EBA\u1EBC\xC9\u1EB8\u1EC6\xCC\u1EC8\u0128\xCD\u1ECA\xD2\u1ECE\xD5\xD3\u1ECC\u1ED8\u1EDC\u1EDE\u1EE0\u1EDA\u1EE2\xD9\u1EE6\u0168\xA0\u0102\xC2\xCA\xD4\u01A0\u01AF\u0110\u0103\xE2\xEA\xF4\u01A1\u01B0\u0111\u1EB0\u0300\u0309\u0303\u0301\u0323\xE0\u1EA3\xE3\xE1\u1EA1\u1EB2\u1EB1\u1EB3\u1EB5\u1EAF\u1EB4\u1EAE\u1EA6\u1EA8\u1EAA\u1EA4\u1EC0\u1EB7\u1EA7\u1EA9\u1EAB\u1EA5\u1EAD\xE8\u1EC2\u1EBB\u1EBD\xE9\u1EB9\u1EC1\u1EC3\u1EC5\u1EBF\u1EC7\xEC\u1EC9\u1EC4\u1EBE\u1ED2\u0129\xED\u1ECB\xF2\u1ED4\u1ECF\xF5\xF3\u1ECD\u1ED3\u1ED5\u1ED7\u1ED1\u1ED9\u1EDD\u1EDF\u1EE1\u1EDB\u1EE3\xF9\u1ED6\u1EE7\u0169\xFA\u1EE5\u1EEB\u1EED\u1EEF\u1EE9\u1EF1\u1EF3\u1EF7\u1EF9\xFD\u1EF5\u1ED0"
 	  },
 	  "georgianacademy": {
 	    "type": "_sbcs",
@@ -2677,15 +2618,15 @@
 	  },
 	  "viscii": {
 	    "type": "_sbcs",
-	    "chars": "\u0000\u0001Ẳ\u0003\u0004ẴẪ\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013Ỷ\u0015\u0016\u0017\u0018Ỹ\u001a\u001b\u001c\u001dỴ\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ẠẮẰẶẤẦẨẬẼẸẾỀỂỄỆỐỒỔỖỘỢỚỜỞỊỎỌỈỦŨỤỲÕắằặấầẩậẽẹếềểễệốồổỗỠƠộờởịỰỨỪỬơớƯÀÁÂÃẢĂẳẵÈÉÊẺÌÍĨỳĐứÒÓÔạỷừửÙÚỹỵÝỡưàáâãảăữẫèéêẻìíĩỉđựòóôõỏọụùúũủýợỮ"
+	    "chars": "\0\x01\u1EB2\x03\x04\u1EB4\u1EAA\x07\b\t\n\x0B\f\r\x0E\x0F\x10\x11\x12\x13\u1EF6\x15\x16\x17\x18\u1EF8\x1A\x1B\x1C\x1D\u1EF4\x1F !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7F\u1EA0\u1EAE\u1EB0\u1EB6\u1EA4\u1EA6\u1EA8\u1EAC\u1EBC\u1EB8\u1EBE\u1EC0\u1EC2\u1EC4\u1EC6\u1ED0\u1ED2\u1ED4\u1ED6\u1ED8\u1EE2\u1EDA\u1EDC\u1EDE\u1ECA\u1ECE\u1ECC\u1EC8\u1EE6\u0168\u1EE4\u1EF2\xD5\u1EAF\u1EB1\u1EB7\u1EA5\u1EA7\u1EA9\u1EAD\u1EBD\u1EB9\u1EBF\u1EC1\u1EC3\u1EC5\u1EC7\u1ED1\u1ED3\u1ED5\u1ED7\u1EE0\u01A0\u1ED9\u1EDD\u1EDF\u1ECB\u1EF0\u1EE8\u1EEA\u1EEC\u01A1\u1EDB\u01AF\xC0\xC1\xC2\xC3\u1EA2\u0102\u1EB3\u1EB5\xC8\xC9\xCA\u1EBA\xCC\xCD\u0128\u1EF3\u0110\u1EE9\xD2\xD3\xD4\u1EA1\u1EF7\u1EEB\u1EED\xD9\xDA\u1EF9\u1EF5\xDD\u1EE1\u01B0\xE0\xE1\xE2\xE3\u1EA3\u0103\u1EEF\u1EAB\xE8\xE9\xEA\u1EBB\xEC\xED\u0129\u1EC9\u0111\u1EF1\xF2\xF3\xF4\xF5\u1ECF\u1ECD\u1EE5\xF9\xFA\u0169\u1EE7\xFD\u1EE3\u1EEE"
 	  },
 	  "iso646cn": {
 	    "type": "_sbcs",
-	    "chars": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#¥%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}‾��������������������������������������������������������������������������������������������������������������������������������"
+	    "chars": "\0\x01\x02\x03\x04\x05\x06\x07\b\t\n\x0B\f\r\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F !\"#\xA5%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}\u203E\x7F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
 	  },
 	  "iso646jp": {
 	    "type": "_sbcs",
-	    "chars": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[¥]^_`abcdefghijklmnopqrstuvwxyz{|}‾��������������������������������������������������������������������������������������������������������������������������������"
+	    "chars": "\0\x01\x02\x03\x04\x05\x06\x07\b\t\n\x0B\f\r\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\xA5]^_`abcdefghijklmnopqrstuvwxyz{|}\u203E\x7F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
 	  },
 	  "hproman8": {
 	    "type": "_sbcs",
@@ -2703,45 +2644,42 @@
 	    "type": "_sbcs",
 	    "chars": "���������������������������������กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุู����฿เแโใไๅๆ็่้๊๋์ํ๎๏๐๑๒๓๔๕๖๗๘๙๚๛����"
 	  }
-	}
+	};
 
 /***/ },
 /* 24 */
 /***/ function(module, exports) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Multibyte codec. In this scheme, a character is represented by 1 or more bytes.
 	// Our codec supports UTF-16 surrogates, extensions for GB18030 and unicode sequences.
 	// To save memory and loading time, we read table files only when requested.
-	
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	exports._dbcs = DBCSCodec;
-	
+
 	var UNASSIGNED = -1,
 	    GB18030_CODE = -2,
-	    SEQ_START  = -10,
+	    SEQ_START = -10,
 	    NODE_START = -1000,
 	    UNASSIGNED_NODE = new Array(0x100),
 	    DEF_CHAR = -1;
-	
-	for (var i = 0; i < 0x100; i++)
+
+	for (var i = 0; i < 0x100; i++) {
 	    UNASSIGNED_NODE[i] = UNASSIGNED;
-	
-	
-	// Class DBCSCodec reads and initializes mapping tables.
+	} // Class DBCSCodec reads and initializes mapping tables.
 	function DBCSCodec(codecOptions, iconv) {
 	    this.encodingName = codecOptions.encodingName;
-	    if (!codecOptions)
-	        throw new Error("DBCS codec is called without the data.")
-	    if (!codecOptions.table)
-	        throw new Error("Encoding '" + this.encodingName + "' has no data.");
-	
+	    if (!codecOptions) throw new Error("DBCS codec is called without the data.");
+	    if (!codecOptions.table) throw new Error("Encoding '" + this.encodingName + "' has no data.");
+
 	    // Load tables.
 	    var mappingTable = codecOptions.table();
-	
-	
+
 	    // Decode tables: MBCS -> Unicode.
-	
+
 	    // decodeTables is a trie, encoded as an array of arrays of integers. Internal arrays are trie nodes and all have len = 256.
 	    // Trie root is decodeTables[0].
 	    // Values: >=  0 -> unicode character code. can be > 0xFFFF
@@ -2751,265 +2689,243 @@
 	    //         <= SEQ_START  -> index of the start of a character code sequence, in decodeTableSeq.
 	    this.decodeTables = [];
 	    this.decodeTables[0] = UNASSIGNED_NODE.slice(0); // Create root node.
-	
+
 	    // Sometimes a MBCS char corresponds to a sequence of unicode chars. We store them as arrays of integers here. 
 	    this.decodeTableSeq = [];
-	
+
 	    // Actual mapping tables consist of chunks. Use them to fill up decode tables.
-	    for (var i = 0; i < mappingTable.length; i++)
+	    for (var i = 0; i < mappingTable.length; i++) {
 	        this._addDecodeChunk(mappingTable[i]);
-	
-	    this.defaultCharUnicode = iconv.defaultCharUnicode;
-	
-	    
+	    }this.defaultCharUnicode = iconv.defaultCharUnicode;
+
 	    // Encode tables: Unicode -> DBCS.
-	
+
 	    // `encodeTable` is array mapping from unicode char to encoded char. All its values are integers for performance.
 	    // Because it can be sparse, it is represented as array of buckets by 256 chars each. Bucket can be null.
 	    // Values: >=  0 -> it is a normal char. Write the value (if <=256 then 1 byte, if <=65536 then 2 bytes, etc.).
 	    //         == UNASSIGNED -> no conversion found. Output a default char.
 	    //         <= SEQ_START  -> it's an index in encodeTableSeq, see below. The character starts a sequence.
 	    this.encodeTable = [];
-	    
+
 	    // `encodeTableSeq` is used when a sequence of unicode characters is encoded as a single code. We use a tree of
 	    // objects where keys correspond to characters in sequence and leafs are the encoded dbcs values. A special DEF_CHAR key
 	    // means end of sequence (needed when one sequence is a strict subsequence of another).
 	    // Objects are kept separately from encodeTable to increase performance.
 	    this.encodeTableSeq = [];
-	
+
 	    // Some chars can be decoded, but need not be encoded.
 	    var skipEncodeChars = {};
-	    if (codecOptions.encodeSkipVals)
-	        for (var i = 0; i < codecOptions.encodeSkipVals.length; i++) {
-	            var val = codecOptions.encodeSkipVals[i];
-	            if (typeof val === 'number')
-	                skipEncodeChars[val] = true;
-	            else
-	                for (var j = val.from; j <= val.to; j++)
-	                    skipEncodeChars[j] = true;
+	    if (codecOptions.encodeSkipVals) for (var i = 0; i < codecOptions.encodeSkipVals.length; i++) {
+	        var val = codecOptions.encodeSkipVals[i];
+	        if (typeof val === 'number') skipEncodeChars[val] = true;else for (var j = val.from; j <= val.to; j++) {
+	            skipEncodeChars[j] = true;
 	        }
-	        
+	    }
+
 	    // Use decode trie to recursively fill out encode tables.
 	    this._fillEncodeTable(0, 0, skipEncodeChars);
-	
+
 	    // Add more encoding pairs when needed.
 	    if (codecOptions.encodeAdd) {
-	        for (var uChar in codecOptions.encodeAdd)
-	            if (Object.prototype.hasOwnProperty.call(codecOptions.encodeAdd, uChar))
-	                this._setEncodeChar(uChar.charCodeAt(0), codecOptions.encodeAdd[uChar]);
+	        for (var uChar in codecOptions.encodeAdd) {
+	            if (Object.prototype.hasOwnProperty.call(codecOptions.encodeAdd, uChar)) this._setEncodeChar(uChar.charCodeAt(0), codecOptions.encodeAdd[uChar]);
+	        }
 	    }
-	
-	    this.defCharSB  = this.encodeTable[0][iconv.defaultCharSingleByte.charCodeAt(0)];
+
+	    this.defCharSB = this.encodeTable[0][iconv.defaultCharSingleByte.charCodeAt(0)];
 	    if (this.defCharSB === UNASSIGNED) this.defCharSB = this.encodeTable[0]['?'];
 	    if (this.defCharSB === UNASSIGNED) this.defCharSB = "?".charCodeAt(0);
-	
-	
+
 	    // Load & create GB18030 tables when needed.
 	    if (typeof codecOptions.gb18030 === 'function') {
 	        this.gb18030 = codecOptions.gb18030(); // Load GB18030 ranges.
-	
+
 	        // Add GB18030 decode tables.
 	        var thirdByteNodeIdx = this.decodeTables.length;
 	        var thirdByteNode = this.decodeTables[thirdByteNodeIdx] = UNASSIGNED_NODE.slice(0);
-	
+
 	        var fourthByteNodeIdx = this.decodeTables.length;
 	        var fourthByteNode = this.decodeTables[fourthByteNodeIdx] = UNASSIGNED_NODE.slice(0);
-	
+
 	        for (var i = 0x81; i <= 0xFE; i++) {
 	            var secondByteNodeIdx = NODE_START - this.decodeTables[0][i];
 	            var secondByteNode = this.decodeTables[secondByteNodeIdx];
-	            for (var j = 0x30; j <= 0x39; j++)
+	            for (var j = 0x30; j <= 0x39; j++) {
 	                secondByteNode[j] = NODE_START - thirdByteNodeIdx;
+	            }
 	        }
-	        for (var i = 0x81; i <= 0xFE; i++)
+	        for (var i = 0x81; i <= 0xFE; i++) {
 	            thirdByteNode[i] = NODE_START - fourthByteNodeIdx;
-	        for (var i = 0x30; i <= 0x39; i++)
-	            fourthByteNode[i] = GB18030_CODE
-	    }        
+	        }for (var i = 0x30; i <= 0x39; i++) {
+	            fourthByteNode[i] = GB18030_CODE;
+	        }
+	    }
 	}
-	
+
 	DBCSCodec.prototype.encoder = DBCSEncoder;
 	DBCSCodec.prototype.decoder = DBCSDecoder;
-	
+
 	// Decoder helpers
-	DBCSCodec.prototype._getDecodeTrieNode = function(addr) {
+	DBCSCodec.prototype._getDecodeTrieNode = function (addr) {
 	    var bytes = [];
-	    for (; addr > 0; addr >>= 8)
+	    for (; addr > 0; addr >>= 8) {
 	        bytes.push(addr & 0xFF);
-	    if (bytes.length == 0)
-	        bytes.push(0);
-	
+	    }if (bytes.length == 0) bytes.push(0);
+
 	    var node = this.decodeTables[0];
-	    for (var i = bytes.length-1; i > 0; i--) { // Traverse nodes deeper into the trie.
+	    for (var i = bytes.length - 1; i > 0; i--) {
+	        // Traverse nodes deeper into the trie.
 	        var val = node[bytes[i]];
-	
-	        if (val == UNASSIGNED) { // Create new node.
+
+	        if (val == UNASSIGNED) {
+	            // Create new node.
 	            node[bytes[i]] = NODE_START - this.decodeTables.length;
 	            this.decodeTables.push(node = UNASSIGNED_NODE.slice(0));
-	        }
-	        else if (val <= NODE_START) { // Existing node.
+	        } else if (val <= NODE_START) {
+	            // Existing node.
 	            node = this.decodeTables[NODE_START - val];
-	        }
-	        else
-	            throw new Error("Overwrite byte in " + this.encodingName + ", addr: " + addr.toString(16));
+	        } else throw new Error("Overwrite byte in " + this.encodingName + ", addr: " + addr.toString(16));
 	    }
 	    return node;
-	}
-	
-	
-	DBCSCodec.prototype._addDecodeChunk = function(chunk) {
+	};
+
+	DBCSCodec.prototype._addDecodeChunk = function (chunk) {
 	    // First element of chunk is the hex mbcs code where we start.
 	    var curAddr = parseInt(chunk[0], 16);
-	
+
 	    // Choose the decoding node where we'll write our chars.
 	    var writeTable = this._getDecodeTrieNode(curAddr);
 	    curAddr = curAddr & 0xFF;
-	
+
 	    // Write all other elements of the chunk to the table.
 	    for (var k = 1; k < chunk.length; k++) {
 	        var part = chunk[k];
-	        if (typeof part === "string") { // String, write as-is.
+	        if (typeof part === "string") {
+	            // String, write as-is.
 	            for (var l = 0; l < part.length;) {
 	                var code = part.charCodeAt(l++);
-	                if (0xD800 <= code && code < 0xDC00) { // Decode surrogate
+	                if (0xD800 <= code && code < 0xDC00) {
+	                    // Decode surrogate
 	                    var codeTrail = part.charCodeAt(l++);
-	                    if (0xDC00 <= codeTrail && codeTrail < 0xE000)
-	                        writeTable[curAddr++] = 0x10000 + (code - 0xD800) * 0x400 + (codeTrail - 0xDC00);
-	                    else
-	                        throw new Error("Incorrect surrogate pair in "  + this.encodingName + " at chunk " + chunk[0]);
-	                }
-	                else if (0x0FF0 < code && code <= 0x0FFF) { // Character sequence (our own encoding used)
+	                    if (0xDC00 <= codeTrail && codeTrail < 0xE000) writeTable[curAddr++] = 0x10000 + (code - 0xD800) * 0x400 + (codeTrail - 0xDC00);else throw new Error("Incorrect surrogate pair in " + this.encodingName + " at chunk " + chunk[0]);
+	                } else if (0x0FF0 < code && code <= 0x0FFF) {
+	                    // Character sequence (our own encoding used)
 	                    var len = 0xFFF - code + 2;
 	                    var seq = [];
-	                    for (var m = 0; m < len; m++)
-	                        seq.push(part.charCodeAt(l++)); // Simple variation: don't support surrogates or subsequences in seq.
-	
+	                    for (var m = 0; m < len; m++) {
+	                        seq.push(part.charCodeAt(l++));
+	                    } // Simple variation: don't support surrogates or subsequences in seq.
+
 	                    writeTable[curAddr++] = SEQ_START - this.decodeTableSeq.length;
 	                    this.decodeTableSeq.push(seq);
-	                }
-	                else
-	                    writeTable[curAddr++] = code; // Basic char
+	                } else writeTable[curAddr++] = code; // Basic char
 	            }
-	        } 
-	        else if (typeof part === "number") { // Integer, meaning increasing sequence starting with prev character.
+	        } else if (typeof part === "number") {
+	            // Integer, meaning increasing sequence starting with prev character.
 	            var charCode = writeTable[curAddr - 1] + 1;
-	            for (var l = 0; l < part; l++)
+	            for (var l = 0; l < part; l++) {
 	                writeTable[curAddr++] = charCode++;
-	        }
-	        else
-	            throw new Error("Incorrect type '" + typeof part + "' given in "  + this.encodingName + " at chunk " + chunk[0]);
+	            }
+	        } else throw new Error("Incorrect type '" + (typeof part === "undefined" ? "undefined" : _typeof(part)) + "' given in " + this.encodingName + " at chunk " + chunk[0]);
 	    }
-	    if (curAddr > 0xFF)
-	        throw new Error("Incorrect chunk in "  + this.encodingName + " at addr " + chunk[0] + ": too long" + curAddr);
-	}
-	
+	    if (curAddr > 0xFF) throw new Error("Incorrect chunk in " + this.encodingName + " at addr " + chunk[0] + ": too long" + curAddr);
+	};
+
 	// Encoder helpers
-	DBCSCodec.prototype._getEncodeBucket = function(uCode) {
+	DBCSCodec.prototype._getEncodeBucket = function (uCode) {
 	    var high = uCode >> 8; // This could be > 0xFF because of astral characters.
-	    if (this.encodeTable[high] === undefined)
-	        this.encodeTable[high] = UNASSIGNED_NODE.slice(0); // Create bucket on demand.
+	    if (this.encodeTable[high] === undefined) this.encodeTable[high] = UNASSIGNED_NODE.slice(0); // Create bucket on demand.
 	    return this.encodeTable[high];
-	}
-	
-	DBCSCodec.prototype._setEncodeChar = function(uCode, dbcsCode) {
+	};
+
+	DBCSCodec.prototype._setEncodeChar = function (uCode, dbcsCode) {
 	    var bucket = this._getEncodeBucket(uCode);
 	    var low = uCode & 0xFF;
-	    if (bucket[low] <= SEQ_START)
-	        this.encodeTableSeq[SEQ_START-bucket[low]][DEF_CHAR] = dbcsCode; // There's already a sequence, set a single-char subsequence of it.
-	    else if (bucket[low] == UNASSIGNED)
-	        bucket[low] = dbcsCode;
-	}
-	
-	DBCSCodec.prototype._setEncodeSequence = function(seq, dbcsCode) {
-	    
+	    if (bucket[low] <= SEQ_START) this.encodeTableSeq[SEQ_START - bucket[low]][DEF_CHAR] = dbcsCode; // There's already a sequence, set a single-char subsequence of it.
+	    else if (bucket[low] == UNASSIGNED) bucket[low] = dbcsCode;
+	};
+
+	DBCSCodec.prototype._setEncodeSequence = function (seq, dbcsCode) {
+
 	    // Get the root of character tree according to first character of the sequence.
 	    var uCode = seq[0];
 	    var bucket = this._getEncodeBucket(uCode);
 	    var low = uCode & 0xFF;
-	
+
 	    var node;
 	    if (bucket[low] <= SEQ_START) {
 	        // There's already a sequence with  - use it.
-	        node = this.encodeTableSeq[SEQ_START-bucket[low]];
-	    }
-	    else {
+	        node = this.encodeTableSeq[SEQ_START - bucket[low]];
+	    } else {
 	        // There was no sequence object - allocate a new one.
 	        node = {};
 	        if (bucket[low] !== UNASSIGNED) node[DEF_CHAR] = bucket[low]; // If a char was set before - make it a single-char subsequence.
 	        bucket[low] = SEQ_START - this.encodeTableSeq.length;
 	        this.encodeTableSeq.push(node);
 	    }
-	
+
 	    // Traverse the character tree, allocating new nodes as needed.
-	    for (var j = 1; j < seq.length-1; j++) {
+	    for (var j = 1; j < seq.length - 1; j++) {
 	        var oldVal = node[uCode];
-	        if (typeof oldVal === 'object')
-	            node = oldVal;
-	        else {
-	            node = node[uCode] = {}
-	            if (oldVal !== undefined)
-	                node[DEF_CHAR] = oldVal
+	        if ((typeof oldVal === "undefined" ? "undefined" : _typeof(oldVal)) === 'object') node = oldVal;else {
+	            node = node[uCode] = {};
+	            if (oldVal !== undefined) node[DEF_CHAR] = oldVal;
 	        }
 	    }
-	
+
 	    // Set the leaf to given dbcsCode.
-	    uCode = seq[seq.length-1];
+	    uCode = seq[seq.length - 1];
 	    node[uCode] = dbcsCode;
-	}
-	
-	DBCSCodec.prototype._fillEncodeTable = function(nodeIdx, prefix, skipEncodeChars) {
+	};
+
+	DBCSCodec.prototype._fillEncodeTable = function (nodeIdx, prefix, skipEncodeChars) {
 	    var node = this.decodeTables[nodeIdx];
 	    for (var i = 0; i < 0x100; i++) {
 	        var uCode = node[i];
 	        var mbCode = prefix + i;
-	        if (skipEncodeChars[mbCode])
-	            continue;
-	
-	        if (uCode >= 0)
-	            this._setEncodeChar(uCode, mbCode);
-	        else if (uCode <= NODE_START)
-	            this._fillEncodeTable(NODE_START - uCode, mbCode << 8, skipEncodeChars);
-	        else if (uCode <= SEQ_START)
-	            this._setEncodeSequence(this.decodeTableSeq[SEQ_START - uCode], mbCode);
+	        if (skipEncodeChars[mbCode]) continue;
+
+	        if (uCode >= 0) this._setEncodeChar(uCode, mbCode);else if (uCode <= NODE_START) this._fillEncodeTable(NODE_START - uCode, mbCode << 8, skipEncodeChars);else if (uCode <= SEQ_START) this._setEncodeSequence(this.decodeTableSeq[SEQ_START - uCode], mbCode);
 	    }
-	}
-	
-	
-	
+	};
+
 	// == Encoder ==================================================================
-	
+
 	function DBCSEncoder(options, codec) {
 	    // Encoder state
 	    this.leadSurrogate = -1;
 	    this.seqObj = undefined;
-	    
+
 	    // Static data
 	    this.encodeTable = codec.encodeTable;
 	    this.encodeTableSeq = codec.encodeTableSeq;
 	    this.defaultCharSingleByte = codec.defCharSB;
 	    this.gb18030 = codec.gb18030;
 	}
-	
-	DBCSEncoder.prototype.write = function(str) {
-	    var newBuf = new Buffer(str.length * (this.gb18030 ? 4 : 3)), 
+
+	DBCSEncoder.prototype.write = function (str) {
+	    var newBuf = new Buffer(str.length * (this.gb18030 ? 4 : 3)),
 	        leadSurrogate = this.leadSurrogate,
-	        seqObj = this.seqObj, nextChar = -1,
-	        i = 0, j = 0;
-	
+	        seqObj = this.seqObj,
+	        nextChar = -1,
+	        i = 0,
+	        j = 0;
+
 	    while (true) {
 	        // 0. Get next character.
 	        if (nextChar === -1) {
 	            if (i == str.length) break;
 	            var uCode = str.charCodeAt(i++);
-	        }
-	        else {
+	        } else {
 	            var uCode = nextChar;
-	            nextChar = -1;    
+	            nextChar = -1;
 	        }
-	
+
 	        // 1. Handle surrogates.
-	        if (0xD800 <= uCode && uCode < 0xE000) { // Char is one of surrogates.
-	            if (uCode < 0xDC00) { // We've got lead surrogate.
+	        if (0xD800 <= uCode && uCode < 0xE000) {
+	            // Char is one of surrogates.
+	            if (uCode < 0xDC00) {
+	                // We've got lead surrogate.
 	                if (leadSurrogate === -1) {
 	                    leadSurrogate = uCode;
 	                    continue;
@@ -3018,7 +2934,8 @@
 	                    // Double lead surrogate found.
 	                    uCode = UNASSIGNED;
 	                }
-	            } else { // We've got trail surrogate.
+	            } else {
+	                // We've got trail surrogate.
 	                if (leadSurrogate !== -1) {
 	                    uCode = 0x10000 + (leadSurrogate - 0xD800) * 0x400 + (uCode - 0xDC00);
 	                    leadSurrogate = -1;
@@ -3026,257 +2943,247 @@
 	                    // Incomplete surrogate pair - only trail surrogate found.
 	                    uCode = UNASSIGNED;
 	                }
-	                
 	            }
-	        }
-	        else if (leadSurrogate !== -1) {
+	        } else if (leadSurrogate !== -1) {
 	            // Incomplete surrogate pair - only lead surrogate found.
-	            nextChar = uCode; uCode = UNASSIGNED; // Write an error, then current char.
+	            nextChar = uCode;uCode = UNASSIGNED; // Write an error, then current char.
 	            leadSurrogate = -1;
 	        }
-	
+
 	        // 2. Convert uCode character.
 	        var dbcsCode = UNASSIGNED;
-	        if (seqObj !== undefined && uCode != UNASSIGNED) { // We are in the middle of the sequence
+	        if (seqObj !== undefined && uCode != UNASSIGNED) {
+	            // We are in the middle of the sequence
 	            var resCode = seqObj[uCode];
-	            if (typeof resCode === 'object') { // Sequence continues.
+	            if ((typeof resCode === "undefined" ? "undefined" : _typeof(resCode)) === 'object') {
+	                // Sequence continues.
 	                seqObj = resCode;
 	                continue;
-	
-	            } else if (typeof resCode == 'number') { // Sequence finished. Write it.
+	            } else if (typeof resCode == 'number') {
+	                // Sequence finished. Write it.
 	                dbcsCode = resCode;
-	
-	            } else if (resCode == undefined) { // Current character is not part of the sequence.
-	
+	            } else if (resCode == undefined) {
+	                // Current character is not part of the sequence.
+
 	                // Try default character for this sequence
 	                resCode = seqObj[DEF_CHAR];
 	                if (resCode !== undefined) {
 	                    dbcsCode = resCode; // Found. Write it.
 	                    nextChar = uCode; // Current character will be written too in the next iteration.
-	
 	                } else {
-	                    // TODO: What if we have no default? (resCode == undefined)
-	                    // Then, we should write first char of the sequence as-is and try the rest recursively.
-	                    // Didn't do it for now because no encoding has this situation yet.
-	                    // Currently, just skip the sequence and write current char.
-	                }
+	                        // TODO: What if we have no default? (resCode == undefined)
+	                        // Then, we should write first char of the sequence as-is and try the rest recursively.
+	                        // Didn't do it for now because no encoding has this situation yet.
+	                        // Currently, just skip the sequence and write current char.
+	                    }
 	            }
 	            seqObj = undefined;
-	        }
-	        else if (uCode >= 0) {  // Regular character
+	        } else if (uCode >= 0) {
+	            // Regular character
 	            var subtable = this.encodeTable[uCode >> 8];
-	            if (subtable !== undefined)
-	                dbcsCode = subtable[uCode & 0xFF];
-	            
-	            if (dbcsCode <= SEQ_START) { // Sequence start
-	                seqObj = this.encodeTableSeq[SEQ_START-dbcsCode];
+	            if (subtable !== undefined) dbcsCode = subtable[uCode & 0xFF];
+
+	            if (dbcsCode <= SEQ_START) {
+	                // Sequence start
+	                seqObj = this.encodeTableSeq[SEQ_START - dbcsCode];
 	                continue;
 	            }
-	
+
 	            if (dbcsCode == UNASSIGNED && this.gb18030) {
 	                // Use GB18030 algorithm to find character(s) to write.
 	                var idx = findIdx(this.gb18030.uChars, uCode);
 	                if (idx != -1) {
 	                    var dbcsCode = this.gb18030.gbChars[idx] + (uCode - this.gb18030.uChars[idx]);
-	                    newBuf[j++] = 0x81 + Math.floor(dbcsCode / 12600); dbcsCode = dbcsCode % 12600;
-	                    newBuf[j++] = 0x30 + Math.floor(dbcsCode / 1260); dbcsCode = dbcsCode % 1260;
-	                    newBuf[j++] = 0x81 + Math.floor(dbcsCode / 10); dbcsCode = dbcsCode % 10;
+	                    newBuf[j++] = 0x81 + Math.floor(dbcsCode / 12600);dbcsCode = dbcsCode % 12600;
+	                    newBuf[j++] = 0x30 + Math.floor(dbcsCode / 1260);dbcsCode = dbcsCode % 1260;
+	                    newBuf[j++] = 0x81 + Math.floor(dbcsCode / 10);dbcsCode = dbcsCode % 10;
 	                    newBuf[j++] = 0x30 + dbcsCode;
 	                    continue;
 	                }
 	            }
 	        }
-	
+
 	        // 3. Write dbcsCode character.
-	        if (dbcsCode === UNASSIGNED)
-	            dbcsCode = this.defaultCharSingleByte;
-	        
+	        if (dbcsCode === UNASSIGNED) dbcsCode = this.defaultCharSingleByte;
+
 	        if (dbcsCode < 0x100) {
 	            newBuf[j++] = dbcsCode;
-	        }
-	        else if (dbcsCode < 0x10000) {
-	            newBuf[j++] = dbcsCode >> 8;   // high byte
+	        } else if (dbcsCode < 0x10000) {
+	            newBuf[j++] = dbcsCode >> 8; // high byte
 	            newBuf[j++] = dbcsCode & 0xFF; // low byte
-	        }
-	        else {
+	        } else {
 	            newBuf[j++] = dbcsCode >> 16;
-	            newBuf[j++] = (dbcsCode >> 8) & 0xFF;
+	            newBuf[j++] = dbcsCode >> 8 & 0xFF;
 	            newBuf[j++] = dbcsCode & 0xFF;
 	        }
 	    }
-	
+
 	    this.seqObj = seqObj;
 	    this.leadSurrogate = leadSurrogate;
 	    return newBuf.slice(0, j);
-	}
-	
-	DBCSEncoder.prototype.end = function() {
-	    if (this.leadSurrogate === -1 && this.seqObj === undefined)
-	        return; // All clean. Most often case.
-	
-	    var newBuf = new Buffer(10), j = 0;
-	
-	    if (this.seqObj) { // We're in the sequence.
+	};
+
+	DBCSEncoder.prototype.end = function () {
+	    if (this.leadSurrogate === -1 && this.seqObj === undefined) return; // All clean. Most often case.
+
+	    var newBuf = new Buffer(10),
+	        j = 0;
+
+	    if (this.seqObj) {
+	        // We're in the sequence.
 	        var dbcsCode = this.seqObj[DEF_CHAR];
-	        if (dbcsCode !== undefined) { // Write beginning of the sequence.
+	        if (dbcsCode !== undefined) {
+	            // Write beginning of the sequence.
 	            if (dbcsCode < 0x100) {
 	                newBuf[j++] = dbcsCode;
-	            }
-	            else {
-	                newBuf[j++] = dbcsCode >> 8;   // high byte
+	            } else {
+	                newBuf[j++] = dbcsCode >> 8; // high byte
 	                newBuf[j++] = dbcsCode & 0xFF; // low byte
 	            }
 	        } else {
-	            // See todo above.
-	        }
+	                // See todo above.
+	            }
 	        this.seqObj = undefined;
 	    }
-	
+
 	    if (this.leadSurrogate !== -1) {
 	        // Incomplete surrogate pair - only lead surrogate found.
 	        newBuf[j++] = this.defaultCharSingleByte;
 	        this.leadSurrogate = -1;
 	    }
-	    
+
 	    return newBuf.slice(0, j);
-	}
-	
+	};
+
 	// Export for testing
 	DBCSEncoder.prototype.findIdx = findIdx;
-	
-	
+
 	// == Decoder ==================================================================
-	
+
 	function DBCSDecoder(options, codec) {
 	    // Decoder state
 	    this.nodeIdx = 0;
 	    this.prevBuf = new Buffer(0);
-	
+
 	    // Static data
 	    this.decodeTables = codec.decodeTables;
 	    this.decodeTableSeq = codec.decodeTableSeq;
 	    this.defaultCharUnicode = codec.defaultCharUnicode;
 	    this.gb18030 = codec.gb18030;
 	}
-	
-	DBCSDecoder.prototype.write = function(buf) {
-	    var newBuf = new Buffer(buf.length*2),
-	        nodeIdx = this.nodeIdx, 
-	        prevBuf = this.prevBuf, prevBufOffset = this.prevBuf.length,
-	        seqStart = -this.prevBuf.length, // idx of the start of current parsed sequence.
-	        uCode;
-	
+
+	DBCSDecoder.prototype.write = function (buf) {
+	    var newBuf = new Buffer(buf.length * 2),
+	        nodeIdx = this.nodeIdx,
+	        prevBuf = this.prevBuf,
+	        prevBufOffset = this.prevBuf.length,
+	        seqStart = -this.prevBuf.length,
+	        // idx of the start of current parsed sequence.
+	    uCode;
+
 	    if (prevBufOffset > 0) // Make prev buf overlap a little to make it easier to slice later.
 	        prevBuf = Buffer.concat([prevBuf, buf.slice(0, 10)]);
-	    
+
 	    for (var i = 0, j = 0; i < buf.length; i++) {
-	        var curByte = (i >= 0) ? buf[i] : prevBuf[i + prevBufOffset];
-	
+	        var curByte = i >= 0 ? buf[i] : prevBuf[i + prevBufOffset];
+
 	        // Lookup in current trie node.
 	        var uCode = this.decodeTables[nodeIdx][curByte];
-	
-	        if (uCode >= 0) { 
+
+	        if (uCode >= 0) {
 	            // Normal character, just use it.
-	        }
-	        else if (uCode === UNASSIGNED) { // Unknown char.
+	        } else if (uCode === UNASSIGNED) {
+	            // Unknown char.
 	            // TODO: Callback with seq.
 	            //var curSeq = (seqStart >= 0) ? buf.slice(seqStart, i+1) : prevBuf.slice(seqStart + prevBufOffset, i+1 + prevBufOffset);
 	            i = seqStart; // Try to parse again, after skipping first byte of the sequence ('i' will be incremented by 'for' cycle).
 	            uCode = this.defaultCharUnicode.charCodeAt(0);
-	        }
-	        else if (uCode === GB18030_CODE) {
-	            var curSeq = (seqStart >= 0) ? buf.slice(seqStart, i+1) : prevBuf.slice(seqStart + prevBufOffset, i+1 + prevBufOffset);
-	            var ptr = (curSeq[0]-0x81)*12600 + (curSeq[1]-0x30)*1260 + (curSeq[2]-0x81)*10 + (curSeq[3]-0x30);
+	        } else if (uCode === GB18030_CODE) {
+	            var curSeq = seqStart >= 0 ? buf.slice(seqStart, i + 1) : prevBuf.slice(seqStart + prevBufOffset, i + 1 + prevBufOffset);
+	            var ptr = (curSeq[0] - 0x81) * 12600 + (curSeq[1] - 0x30) * 1260 + (curSeq[2] - 0x81) * 10 + (curSeq[3] - 0x30);
 	            var idx = findIdx(this.gb18030.gbChars, ptr);
 	            uCode = this.gb18030.uChars[idx] + ptr - this.gb18030.gbChars[idx];
-	        }
-	        else if (uCode <= NODE_START) { // Go to next trie node.
+	        } else if (uCode <= NODE_START) {
+	            // Go to next trie node.
 	            nodeIdx = NODE_START - uCode;
 	            continue;
-	        }
-	        else if (uCode <= SEQ_START) { // Output a sequence of chars.
+	        } else if (uCode <= SEQ_START) {
+	            // Output a sequence of chars.
 	            var seq = this.decodeTableSeq[SEQ_START - uCode];
 	            for (var k = 0; k < seq.length - 1; k++) {
 	                uCode = seq[k];
 	                newBuf[j++] = uCode & 0xFF;
 	                newBuf[j++] = uCode >> 8;
 	            }
-	            uCode = seq[seq.length-1];
-	        }
-	        else
-	            throw new Error("iconv-lite internal error: invalid decoding table value " + uCode + " at " + nodeIdx + "/" + curByte);
-	
+	            uCode = seq[seq.length - 1];
+	        } else throw new Error("iconv-lite internal error: invalid decoding table value " + uCode + " at " + nodeIdx + "/" + curByte);
+
 	        // Write the character to buffer, handling higher planes using surrogate pair.
-	        if (uCode > 0xFFFF) { 
+	        if (uCode > 0xFFFF) {
 	            uCode -= 0x10000;
 	            var uCodeLead = 0xD800 + Math.floor(uCode / 0x400);
 	            newBuf[j++] = uCodeLead & 0xFF;
 	            newBuf[j++] = uCodeLead >> 8;
-	
+
 	            uCode = 0xDC00 + uCode % 0x400;
 	        }
 	        newBuf[j++] = uCode & 0xFF;
 	        newBuf[j++] = uCode >> 8;
-	
+
 	        // Reset trie node.
-	        nodeIdx = 0; seqStart = i+1;
+	        nodeIdx = 0;seqStart = i + 1;
 	    }
-	
+
 	    this.nodeIdx = nodeIdx;
-	    this.prevBuf = (seqStart >= 0) ? buf.slice(seqStart) : prevBuf.slice(seqStart + prevBufOffset);
+	    this.prevBuf = seqStart >= 0 ? buf.slice(seqStart) : prevBuf.slice(seqStart + prevBufOffset);
 	    return newBuf.slice(0, j).toString('ucs2');
-	}
-	
-	DBCSDecoder.prototype.end = function() {
+	};
+
+	DBCSDecoder.prototype.end = function () {
 	    var ret = '';
-	
+
 	    // Try to parse all remaining chars.
 	    while (this.prevBuf.length > 0) {
 	        // Skip 1 character in the buffer.
 	        ret += this.defaultCharUnicode;
 	        var buf = this.prevBuf.slice(1);
-	
+
 	        // Parse remaining as usual.
 	        this.prevBuf = new Buffer(0);
 	        this.nodeIdx = 0;
-	        if (buf.length > 0)
-	            ret += this.write(buf);
+	        if (buf.length > 0) ret += this.write(buf);
 	    }
-	
+
 	    this.nodeIdx = 0;
 	    return ret;
-	}
-	
+	};
+
 	// Binary search for GB18030. Returns largest i such that table[i] <= val.
 	function findIdx(table, val) {
-	    if (table[0] > val)
-	        return -1;
-	
-	    var l = 0, r = table.length;
-	    while (l < r-1) { // always table[l] <= val < table[r]
-	        var mid = l + Math.floor((r-l+1)/2);
-	        if (table[mid] <= val)
-	            l = mid;
-	        else
-	            r = mid;
+	    if (table[0] > val) return -1;
+
+	    var l = 0,
+	        r = table.length;
+	    while (l < r - 1) {
+	        // always table[l] <= val < table[r]
+	        var mid = l + Math.floor((r - l + 1) / 2);
+	        if (table[mid] <= val) l = mid;else r = mid;
 	    }
 	    return l;
 	}
-	
-
 
 /***/ },
 /* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
 	// Description of supported double byte encodings and aliases.
 	// Tables are not require()-d until they are needed to speed up library load.
 	// require()-s are direct to support Browserify.
-	
+
 	module.exports = {
-	    
+
 	    // == Japanese/ShiftJIS ====================================================
 	    // All japanese encodings are based on JIS X set of standards:
 	    // JIS X 0201 - Single-byte encoding of ASCII + ¥ + Kana chars at 0xA1-0xDF.
@@ -3286,7 +3193,7 @@
 	    // JIS X 0213 - Extension and modern replacement of 0208 and 0212. Total chars: 11233.
 	    //              2 planes, first is superset of 0208, second - revised 0212.
 	    //              Introduced in 2000, revised 2004. Some characters are in Unicode Plane 2 (0x2xxxx)
-	
+
 	    // Byte encodings are:
 	    //  * Shift_JIS: Compatible with 0201, uses not defined chars in top half as lead bytes for double-byte
 	    //               encoding of 0208. Lead byte ranges: 0x81-0x9F, 0xE0-0xEF; Trail byte ranges: 0x40-0x7E, 0x80-0x9E, 0x9F-0xFC.
@@ -3308,13 +3215,15 @@
 	    // After JIS X 0213 appeared, Shift_JIS-2004, EUC-JISX0213 and ISO2022-JP-2004 followed, with just changing the planes.
 	    //
 	    // Overall, it seems that it's a mess :( http://www8.plala.or.jp/tkubota1/unicode-symbols-map2.html
-	
-	
+
+
 	    'shiftjis': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(26) },
-	        encodeAdd: {'\u00a5': 0x5C, '\u203E': 0x7E},
-	        encodeSkipVals: [{from: 0xED40, to: 0xF940}],
+	        table: function table() {
+	            return __webpack_require__(26);
+	        },
+	        encodeAdd: { '\xA5': 0x5C, '\u203E': 0x7E },
+	        encodeSkipVals: [{ from: 0xED40, to: 0xF940 }]
 	    },
 	    'csshiftjis': 'shiftjis',
 	    'mskanji': 'shiftjis',
@@ -3324,20 +3233,22 @@
 	    'windows932': 'shiftjis',
 	    '932': 'shiftjis',
 	    'cp932': 'shiftjis',
-	
+
 	    'eucjp': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(27) },
-	        encodeAdd: {'\u00a5': 0x5C, '\u203E': 0x7E},
+	        table: function table() {
+	            return __webpack_require__(27);
+	        },
+	        encodeAdd: { '\xA5': 0x5C, '\u203E': 0x7E }
 	    },
-	
+
 	    // TODO: KDDI extension to Shift_JIS
 	    // TODO: IBM CCSID 942 = CP932, but F0-F9 custom chars and other char changes.
 	    // TODO: IBM CCSID 943 = Shift_JIS = CP932 with original Shift_JIS lower 128 chars.
-	
+
 	    // == Chinese/GBK ==========================================================
 	    // http://en.wikipedia.org/wiki/GBK
-	
+
 	    // Oldest GB2312 (1981, ~7600 chars) is a subset of CP936
 	    'gb2312': 'cp936',
 	    'gb231280': 'cp936',
@@ -3346,46 +3257,56 @@
 	    'csiso58gb231280': 'cp936',
 	    'euccn': 'cp936',
 	    'isoir58': 'gbk',
-	
+
 	    // Microsoft's CP936 is a subset and approximation of GBK.
 	    // TODO: Euro = 0x80 in cp936, but not in GBK (where it's valid but undefined)
 	    'windows936': 'cp936',
 	    '936': 'cp936',
 	    'cp936': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(28) },
+	        table: function table() {
+	            return __webpack_require__(28);
+	        }
 	    },
-	
+
 	    // GBK (~22000 chars) is an extension of CP936 that added user-mapped chars and some other.
 	    'gbk': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(28).concat(__webpack_require__(29)) },
+	        table: function table() {
+	            return __webpack_require__(28).concat(__webpack_require__(29));
+	        }
 	    },
 	    'xgbk': 'gbk',
-	
+
 	    // GB18030 is an algorithmic extension of GBK.
 	    'gb18030': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(28).concat(__webpack_require__(29)) },
-	        gb18030: function() { return __webpack_require__(30) },
+	        table: function table() {
+	            return __webpack_require__(28).concat(__webpack_require__(29));
+	        },
+	        gb18030: function gb18030() {
+	            return __webpack_require__(30);
+	        }
 	    },
-	
+
 	    'chinese': 'gb18030',
-	
+
 	    // TODO: Support GB18030 (~27000 chars + whole unicode mapping, cp54936)
 	    // http://icu-project.org/docs/papers/gb18030.html
 	    // http://source.icu-project.org/repos/icu/data/trunk/charset/data/xml/gb-18030-2000.xml
 	    // http://www.khngai.com/chinese/charmap/tblgbk.php?page=0
-	
+
 	    // == Korean ===============================================================
 	    // EUC-KR, KS_C_5601 and KS X 1001 are exactly the same.
 	    'windows949': 'cp949',
 	    '949': 'cp949',
 	    'cp949': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(31) },
+	        table: function table() {
+	            return __webpack_require__(31);
+	        }
 	    },
-	
+
 	    'cseuckr': 'cp949',
 	    'csksc56011987': 'cp949',
 	    'euckr': 'cp949',
@@ -3394,8 +3315,7 @@
 	    'ksc56011987': 'cp949',
 	    'ksc56011989': 'cp949',
 	    'ksc5601': 'cp949',
-	
-	
+
 	    // == Big5/Taiwan/Hong Kong ================================================
 	    // There are lots of tables for Big5 and cp950. Please see the following links for history:
 	    // http://moztw.org/docs/big5/  http://www.haible.de/bruno/charsets/conversion-tables/Big5.html
@@ -3418,28 +3338,31 @@
 	    // 
 	    // Current understanding of how to deal with Big5(-HKSCS) is in the Encoding Standard, http://encoding.spec.whatwg.org/#big5-encoder
 	    // Unicode mapping (http://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/OTHER/BIG5.TXT) is said to be wrong.
-	
+
 	    'windows950': 'cp950',
 	    '950': 'cp950',
 	    'cp950': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(32) },
+	        table: function table() {
+	            return __webpack_require__(32);
+	        }
 	    },
-	
+
 	    // Big5 has many variations and is an extension of cp950. We use Encoding Standard's as a consensus.
 	    'big5': 'big5hkscs',
 	    'big5hkscs': {
 	        type: '_dbcs',
-	        table: function() { return __webpack_require__(32).concat(__webpack_require__(33)) },
-	        encodeSkipVals: [0xa2cc],
+	        table: function table() {
+	            return __webpack_require__(32).concat(__webpack_require__(33));
+	        },
+	        encodeSkipVals: [0xa2cc]
 	    },
-	
+
 	    'cnbig5': 'big5hkscs',
 	    'csbig5': 'big5hkscs',
-	    'xxbig5': 'big5hkscs',
-	
-	};
+	    'xxbig5': 'big5hkscs'
 
+	};
 
 /***/ },
 /* 26 */
@@ -11757,33 +11680,30 @@
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
 	var Transform = __webpack_require__(11).Transform;
-	
-	
+
 	// == Exports ==================================================================
-	module.exports = function(iconv) {
-	    
+	module.exports = function (iconv) {
+
 	    // Additional Public API.
 	    iconv.encodeStream = function encodeStream(encoding, options) {
 	        return new IconvLiteEncoderStream(iconv.getEncoder(encoding, options), options);
-	    }
-	
+	    };
+
 	    iconv.decodeStream = function decodeStream(encoding, options) {
 	        return new IconvLiteDecoderStream(iconv.getDecoder(encoding, options), options);
-	    }
-	
+	    };
+
 	    iconv.supportsStreams = true;
-	
-	
+
 	    // Not published yet.
 	    iconv.IconvLiteEncoderStream = IconvLiteEncoderStream;
 	    iconv.IconvLiteDecoderStream = IconvLiteDecoderStream;
 	    iconv._collect = IconvLiteDecoderStream.prototype.collect;
 	};
-	
-	
+
 	// == Encoder stream =======================================================
 	function IconvLiteEncoderStream(conv, options) {
 	    this.conv = conv;
@@ -11791,46 +11711,44 @@
 	    options.decodeStrings = false; // We accept only strings, so we don't need to decode them.
 	    Transform.call(this, options);
 	}
-	
+
 	IconvLiteEncoderStream.prototype = Object.create(Transform.prototype, {
 	    constructor: { value: IconvLiteEncoderStream }
 	});
-	
-	IconvLiteEncoderStream.prototype._transform = function(chunk, encoding, done) {
-	    if (typeof chunk != 'string')
-	        return done(new Error("Iconv encoding stream needs strings as its input."));
+
+	IconvLiteEncoderStream.prototype._transform = function (chunk, encoding, done) {
+	    if (typeof chunk != 'string') return done(new Error("Iconv encoding stream needs strings as its input."));
 	    try {
 	        var res = this.conv.write(chunk);
 	        if (res && res.length) this.push(res);
 	        done();
-	    }
-	    catch (e) {
+	    } catch (e) {
 	        done(e);
 	    }
-	}
-	
-	IconvLiteEncoderStream.prototype._flush = function(done) {
+	};
+
+	IconvLiteEncoderStream.prototype._flush = function (done) {
 	    try {
 	        var res = this.conv.end();
 	        if (res && res.length) this.push(res);
 	        done();
-	    }
-	    catch (e) {
+	    } catch (e) {
 	        done(e);
 	    }
-	}
-	
-	IconvLiteEncoderStream.prototype.collect = function(cb) {
+	};
+
+	IconvLiteEncoderStream.prototype.collect = function (cb) {
 	    var chunks = [];
 	    this.on('error', cb);
-	    this.on('data', function(chunk) { chunks.push(chunk); });
-	    this.on('end', function() {
+	    this.on('data', function (chunk) {
+	        chunks.push(chunk);
+	    });
+	    this.on('end', function () {
 	        cb(null, Buffer.concat(chunks));
 	    });
 	    return this;
-	}
-	
-	
+	};
+
 	// == Decoder stream =======================================================
 	function IconvLiteDecoderStream(conv, options) {
 	    this.conv = conv;
@@ -11838,100 +11756,96 @@
 	    options.encoding = this.encoding = 'utf8'; // We output strings.
 	    Transform.call(this, options);
 	}
-	
+
 	IconvLiteDecoderStream.prototype = Object.create(Transform.prototype, {
 	    constructor: { value: IconvLiteDecoderStream }
 	});
-	
-	IconvLiteDecoderStream.prototype._transform = function(chunk, encoding, done) {
-	    if (!Buffer.isBuffer(chunk))
-	        return done(new Error("Iconv decoding stream needs buffers as its input."));
+
+	IconvLiteDecoderStream.prototype._transform = function (chunk, encoding, done) {
+	    if (!Buffer.isBuffer(chunk)) return done(new Error("Iconv decoding stream needs buffers as its input."));
 	    try {
 	        var res = this.conv.write(chunk);
 	        if (res && res.length) this.push(res, this.encoding);
 	        done();
-	    }
-	    catch (e) {
+	    } catch (e) {
 	        done(e);
 	    }
-	}
-	
-	IconvLiteDecoderStream.prototype._flush = function(done) {
+	};
+
+	IconvLiteDecoderStream.prototype._flush = function (done) {
 	    try {
 	        var res = this.conv.end();
-	        if (res && res.length) this.push(res, this.encoding);                
+	        if (res && res.length) this.push(res, this.encoding);
 	        done();
-	    }
-	    catch (e) {
+	    } catch (e) {
 	        done(e);
 	    }
-	}
-	
-	IconvLiteDecoderStream.prototype.collect = function(cb) {
+	};
+
+	IconvLiteDecoderStream.prototype.collect = function (cb) {
 	    var res = '';
 	    this.on('error', cb);
-	    this.on('data', function(chunk) { res += chunk; });
-	    this.on('end', function() {
+	    this.on('data', function (chunk) {
+	        res += chunk;
+	    });
+	    this.on('end', function () {
 	        cb(null, res);
 	    });
 	    return this;
-	}
-	
-
+	};
 
 /***/ },
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict"
-	
+	"use strict";
+
 	// == Extend Node primitives to use iconv-lite =================================
-	
+
 	module.exports = function (iconv) {
 	    var original = undefined; // Place to keep original methods.
-	
+
 	    // Node authors rewrote Buffer internals to make it compatible with
 	    // Uint8Array and we cannot patch key functions since then.
 	    iconv.supportsNodeEncodingsExtension = !(new Buffer(0) instanceof Uint8Array);
-	
+
 	    iconv.extendNodeEncodings = function extendNodeEncodings() {
 	        if (original) return;
 	        original = {};
-	
+
 	        if (!iconv.supportsNodeEncodingsExtension) {
 	            console.error("ACTION NEEDED: require('iconv-lite').extendNodeEncodings() is not supported in your version of Node");
 	            console.error("See more info at https://github.com/ashtuchkin/iconv-lite/wiki/Node-v4-compatibility");
 	            return;
 	        }
-	
+
 	        var nodeNativeEncodings = {
-	            'hex': true, 'utf8': true, 'utf-8': true, 'ascii': true, 'binary': true, 
-	            'base64': true, 'ucs2': true, 'ucs-2': true, 'utf16le': true, 'utf-16le': true,
+	            'hex': true, 'utf8': true, 'utf-8': true, 'ascii': true, 'binary': true,
+	            'base64': true, 'ucs2': true, 'ucs-2': true, 'utf16le': true, 'utf-16le': true
 	        };
-	
-	        Buffer.isNativeEncoding = function(enc) {
+
+	        Buffer.isNativeEncoding = function (enc) {
 	            return enc && nodeNativeEncodings[enc.toLowerCase()];
-	        }
-	
+	        };
+
 	        // -- SlowBuffer -----------------------------------------------------------
 	        var SlowBuffer = __webpack_require__(36).SlowBuffer;
-	
+
 	        original.SlowBufferToString = SlowBuffer.prototype.toString;
-	        SlowBuffer.prototype.toString = function(encoding, start, end) {
+	        SlowBuffer.prototype.toString = function (encoding, start, end) {
 	            encoding = String(encoding || 'utf8').toLowerCase();
-	
+
 	            // Use native conversion when possible
-	            if (Buffer.isNativeEncoding(encoding))
-	                return original.SlowBufferToString.call(this, encoding, start, end);
-	
+	            if (Buffer.isNativeEncoding(encoding)) return original.SlowBufferToString.call(this, encoding, start, end);
+
 	            // Otherwise, use our decoding method.
 	            if (typeof start == 'undefined') start = 0;
 	            if (typeof end == 'undefined') end = this.length;
 	            return iconv.decode(this.slice(start, end), encoding);
-	        }
-	
+	        };
+
 	        original.SlowBufferWrite = SlowBuffer.prototype.write;
-	        SlowBuffer.prototype.write = function(string, offset, length, encoding) {
+	        SlowBuffer.prototype.write = function (string, offset, length, encoding) {
 	            // Support both (string, offset, length, encoding)
 	            // and the legacy (string, encoding, offset, length)
 	            if (isFinite(offset)) {
@@ -11939,13 +11853,14 @@
 	                    encoding = length;
 	                    length = undefined;
 	                }
-	            } else {  // legacy
+	            } else {
+	                // legacy
 	                var swap = encoding;
 	                encoding = offset;
 	                offset = length;
 	                length = swap;
 	            }
-	
+
 	            offset = +offset || 0;
 	            var remaining = this.length - offset;
 	            if (!length) {
@@ -11957,57 +11872,55 @@
 	                }
 	            }
 	            encoding = String(encoding || 'utf8').toLowerCase();
-	
+
 	            // Use native conversion when possible
-	            if (Buffer.isNativeEncoding(encoding))
-	                return original.SlowBufferWrite.call(this, string, offset, length, encoding);
-	
-	            if (string.length > 0 && (length < 0 || offset < 0))
-	                throw new RangeError('attempt to write beyond buffer bounds');
-	
+	            if (Buffer.isNativeEncoding(encoding)) return original.SlowBufferWrite.call(this, string, offset, length, encoding);
+
+	            if (string.length > 0 && (length < 0 || offset < 0)) throw new RangeError('attempt to write beyond buffer bounds');
+
 	            // Otherwise, use our encoding method.
 	            var buf = iconv.encode(string, encoding);
 	            if (buf.length < length) length = buf.length;
 	            buf.copy(this, offset, 0, length);
 	            return length;
-	        }
-	
+	        };
+
 	        // -- Buffer ---------------------------------------------------------------
-	
+
 	        original.BufferIsEncoding = Buffer.isEncoding;
-	        Buffer.isEncoding = function(encoding) {
+	        Buffer.isEncoding = function (encoding) {
 	            return Buffer.isNativeEncoding(encoding) || iconv.encodingExists(encoding);
-	        }
-	
+	        };
+
 	        original.BufferByteLength = Buffer.byteLength;
-	        Buffer.byteLength = SlowBuffer.byteLength = function(str, encoding) {
+	        Buffer.byteLength = SlowBuffer.byteLength = function (str, encoding) {
 	            encoding = String(encoding || 'utf8').toLowerCase();
-	
+
 	            // Use native conversion when possible
-	            if (Buffer.isNativeEncoding(encoding))
-	                return original.BufferByteLength.call(this, str, encoding);
-	
+	            if (Buffer.isNativeEncoding(encoding)) return original.BufferByteLength.call(this, str, encoding);
+
 	            // Slow, I know, but we don't have a better way yet.
 	            return iconv.encode(str, encoding).length;
-	        }
-	
+	        };
+
 	        original.BufferToString = Buffer.prototype.toString;
-	        Buffer.prototype.toString = function(encoding, start, end) {
+	        Buffer.prototype.toString = function (encoding, start, end) {
 	            encoding = String(encoding || 'utf8').toLowerCase();
-	
+
 	            // Use native conversion when possible
-	            if (Buffer.isNativeEncoding(encoding))
-	                return original.BufferToString.call(this, encoding, start, end);
-	
+	            if (Buffer.isNativeEncoding(encoding)) return original.BufferToString.call(this, encoding, start, end);
+
 	            // Otherwise, use our decoding method.
 	            if (typeof start == 'undefined') start = 0;
 	            if (typeof end == 'undefined') end = this.length;
 	            return iconv.decode(this.slice(start, end), encoding);
-	        }
-	
+	        };
+
 	        original.BufferWrite = Buffer.prototype.write;
-	        Buffer.prototype.write = function(string, offset, length, encoding) {
-	            var _offset = offset, _length = length, _encoding = encoding;
+	        Buffer.prototype.write = function (string, offset, length, encoding) {
+	            var _offset = offset,
+	                _length = length,
+	                _encoding = encoding;
 	            // Support both (string, offset, length, encoding)
 	            // and the legacy (string, encoding, offset, length)
 	            if (isFinite(offset)) {
@@ -12015,19 +11928,19 @@
 	                    encoding = length;
 	                    length = undefined;
 	                }
-	            } else {  // legacy
+	            } else {
+	                // legacy
 	                var swap = encoding;
 	                encoding = offset;
 	                offset = length;
 	                length = swap;
 	            }
-	
+
 	            encoding = String(encoding || 'utf8').toLowerCase();
-	
+
 	            // Use native conversion when possible
-	            if (Buffer.isNativeEncoding(encoding))
-	                return original.BufferWrite.call(this, string, _offset, _length, _encoding);
-	
+	            if (Buffer.isNativeEncoding(encoding)) return original.BufferWrite.call(this, string, _offset, _length, _encoding);
+
 	            offset = +offset || 0;
 	            var remaining = this.length - offset;
 	            if (!length) {
@@ -12038,66 +11951,61 @@
 	                    length = remaining;
 	                }
 	            }
-	
-	            if (string.length > 0 && (length < 0 || offset < 0))
-	                throw new RangeError('attempt to write beyond buffer bounds');
-	
+
+	            if (string.length > 0 && (length < 0 || offset < 0)) throw new RangeError('attempt to write beyond buffer bounds');
+
 	            // Otherwise, use our encoding method.
 	            var buf = iconv.encode(string, encoding);
 	            if (buf.length < length) length = buf.length;
 	            buf.copy(this, offset, 0, length);
 	            return length;
-	
+
 	            // TODO: Set _charsWritten.
-	        }
-	
-	
+	        };
+
 	        // -- Readable -------------------------------------------------------------
 	        if (iconv.supportsStreams) {
 	            var Readable = __webpack_require__(11).Readable;
-	
+
 	            original.ReadableSetEncoding = Readable.prototype.setEncoding;
 	            Readable.prototype.setEncoding = function setEncoding(enc, options) {
 	                // Use our own decoder, it has the same interface.
 	                // We cannot use original function as it doesn't handle BOM-s.
 	                this._readableState.decoder = iconv.getDecoder(enc, options);
 	                this._readableState.encoding = enc;
-	            }
-	
+	            };
+
 	            Readable.prototype.collect = iconv._collect;
 	        }
-	    }
-	
+	    };
+
 	    // Remove iconv-lite Node primitive extensions.
 	    iconv.undoExtendNodeEncodings = function undoExtendNodeEncodings() {
-	        if (!iconv.supportsNodeEncodingsExtension)
-	            return;
-	        if (!original)
-	            throw new Error("require('iconv-lite').undoExtendNodeEncodings(): Nothing to undo; extendNodeEncodings() is not called.")
-	
+	        if (!iconv.supportsNodeEncodingsExtension) return;
+	        if (!original) throw new Error("require('iconv-lite').undoExtendNodeEncodings(): Nothing to undo; extendNodeEncodings() is not called.");
+
 	        delete Buffer.isNativeEncoding;
-	
+
 	        var SlowBuffer = __webpack_require__(36).SlowBuffer;
-	
+
 	        SlowBuffer.prototype.toString = original.SlowBufferToString;
 	        SlowBuffer.prototype.write = original.SlowBufferWrite;
-	
+
 	        Buffer.isEncoding = original.BufferIsEncoding;
 	        Buffer.byteLength = original.BufferByteLength;
 	        Buffer.prototype.toString = original.BufferToString;
 	        Buffer.prototype.write = original.BufferWrite;
-	
+
 	        if (iconv.supportsStreams) {
 	            var Readable = __webpack_require__(11).Readable;
-	
+
 	            Readable.prototype.setEncoding = original.ReadableSetEncoding;
 	            delete Readable.prototype.collect;
 	        }
-	
-	        original = undefined;
-	    }
-	}
 
+	        original = undefined;
+	    };
+	};
 
 /***/ },
 /* 36 */
@@ -12110,41 +12018,43 @@
 /***/ function(module, exports) {
 
 	'use strict';
-	
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var isStream = module.exports = function (stream) {
-		return stream !== null && typeof stream === 'object' && typeof stream.pipe === 'function';
+		return stream !== null && (typeof stream === 'undefined' ? 'undefined' : _typeof(stream)) === 'object' && typeof stream.pipe === 'function';
 	};
-	
+
 	isStream.writable = function (stream) {
-		return isStream(stream) && stream.writable !== false && typeof stream._write === 'function' && typeof stream._writableState === 'object';
+		return isStream(stream) && stream.writable !== false && typeof stream._write === 'function' && _typeof(stream._writableState) === 'object';
 	};
-	
+
 	isStream.readable = function (stream) {
-		return isStream(stream) && stream.readable !== false && typeof stream._read === 'function' && typeof stream._readableState === 'object';
+		return isStream(stream) && stream.readable !== false && typeof stream._read === 'function' && _typeof(stream._readableState) === 'object';
 	};
-	
+
 	isStream.duplex = function (stream) {
 		return isStream.writable(stream) && isStream.readable(stream);
 	};
-	
-	isStream.transform = function (stream) {
-		return isStream.duplex(stream) && typeof stream._transform === 'function' && typeof stream._transformState === 'object';
-	};
 
+	isStream.transform = function (stream) {
+		return isStream.duplex(stream) && typeof stream._transform === 'function' && _typeof(stream._transformState) === 'object';
+	};
 
 /***/ },
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	'use strict';
+
 	/**
 	 * fetch-error.js
 	 *
 	 * FetchError interface for operational errors
 	 */
-	
+
 	module.exports = FetchError;
-	
+
 	/**
 	 * Create FetchError instance
 	 *
@@ -12154,23 +12064,21 @@
 	 * @return  FetchError
 	 */
 	function FetchError(message, type, systemError) {
-	
-		// hide custom error implementation details from end-users
-		Error.captureStackTrace(this, this.constructor);
-	
-		this.name = this.constructor.name;
-		this.message = message;
-		this.type = type;
-	
-		// when err.type is `system`, err.code contains system error code
-		if (systemError) {
-			this.code = this.errno = systemError.code;
-		}
-	
-	}
-	
-	__webpack_require__(39).inherits(FetchError, Error);
 
+	  // hide custom error implementation details from end-users
+	  Error.captureStackTrace(this, this.constructor);
+
+	  this.name = this.constructor.name;
+	  this.message = message;
+	  this.type = type;
+
+	  // when err.type is `system`, err.code contains system error code
+	  if (systemError) {
+	    this.code = this.errno = systemError.code;
+	  }
+	}
+
+	__webpack_require__(39).inherits(FetchError, Error);
 
 /***/ },
 /* 39 */
@@ -12182,19 +12090,20 @@
 /* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	'use strict';
+
 	/**
 	 * response.js
 	 *
 	 * Response class provides content decoding
 	 */
-	
+
 	var http = __webpack_require__(8);
 	var Headers = __webpack_require__(41);
 	var Body = __webpack_require__(12);
-	
+
 	module.exports = Response;
-	
+
 	/**
 	 * Response class
 	 *
@@ -12203,50 +12112,49 @@
 	 * @return  Void
 	 */
 	function Response(body, opts) {
-	
-		opts = opts || {};
-	
-		this.url = opts.url;
-		this.status = opts.status || 200;
-		this.statusText = opts.statusText || http.STATUS_CODES[this.status];
-		this.headers = new Headers(opts.headers);
-		this.ok = this.status >= 200 && this.status < 300;
-	
-		Body.call(this, body, opts);
-	
+
+	  opts = opts || {};
+
+	  this.url = opts.url;
+	  this.status = opts.status || 200;
+	  this.statusText = opts.statusText || http.STATUS_CODES[this.status];
+	  this.headers = new Headers(opts.headers);
+	  this.ok = this.status >= 200 && this.status < 300;
+
+	  Body.call(this, body, opts);
 	}
-	
+
 	Response.prototype = Object.create(Body.prototype);
-	
+
 	/**
 	 * Clone this response
 	 *
 	 * @return  Response
 	 */
-	Response.prototype.clone = function() {
-		return new Response(this._clone(this), {
-			url: this.url
-			, status: this.status
-			, statusText: this.statusText
-			, headers: this.headers
-			, ok: this.ok
-		});
+	Response.prototype.clone = function () {
+	  return new Response(this._clone(this), {
+	    url: this.url,
+	    status: this.status,
+	    statusText: this.statusText,
+	    headers: this.headers,
+	    ok: this.ok
+	  });
 	};
-
 
 /***/ },
 /* 41 */
 /***/ function(module, exports) {
 
-	
+	'use strict';
+
 	/**
 	 * headers.js
 	 *
 	 * Headers class offers convenient helpers
 	 */
-	
+
 	module.exports = Headers;
-	
+
 	/**
 	 * Headers class
 	 *
@@ -12254,61 +12162,58 @@
 	 * @return  Void
 	 */
 	function Headers(headers) {
-	
-		var self = this;
-		this._headers = {};
-	
-		// Headers
-		if (headers instanceof Headers) {
-			headers = headers.raw();
-		}
-	
-		// plain object
-		for (var prop in headers) {
-			if (!headers.hasOwnProperty(prop)) {
-				continue;
-			}
-	
-			if (typeof headers[prop] === 'string') {
-				this.set(prop, headers[prop]);
-	
-			} else if (typeof headers[prop] === 'number' && !isNaN(headers[prop])) {
-				this.set(prop, headers[prop].toString());
-	
-			} else if (headers[prop] instanceof Array) {
-				headers[prop].forEach(function(item) {
-					self.append(prop, item.toString());
-				});
-			}
-		}
-	
+
+	  var self = this;
+	  this._headers = {};
+
+	  // Headers
+	  if (headers instanceof Headers) {
+	    headers = headers.raw();
+	  }
+
+	  // plain object
+	  for (var prop in headers) {
+	    if (!headers.hasOwnProperty(prop)) {
+	      continue;
+	    }
+
+	    if (typeof headers[prop] === 'string') {
+	      this.set(prop, headers[prop]);
+	    } else if (typeof headers[prop] === 'number' && !isNaN(headers[prop])) {
+	      this.set(prop, headers[prop].toString());
+	    } else if (headers[prop] instanceof Array) {
+	      headers[prop].forEach(function (item) {
+	        self.append(prop, item.toString());
+	      });
+	    }
+	  }
 	}
-	
+
 	/**
 	 * Return first header value given name
 	 *
 	 * @param   String  name  Header name
 	 * @return  Mixed
 	 */
-	Headers.prototype.get = function(name) {
-		var list = this._headers[name.toLowerCase()];
-		return list ? list[0] : null;
+	Headers.prototype.get = function (name) {
+	  var list = this._headers[name.toLowerCase()];
+	  return list ? list[0] : null;
 	};
-	
+
 	/**
 	 * Return all header values given name
 	 *
 	 * @param   String  name  Header name
 	 * @return  Array
 	 */
-	Headers.prototype.getAll = function(name) {
-		if (!this.has(name)) {
-			return [];
-		}
-	
-		return this._headers[name.toLowerCase()];
+	Headers.prototype.getAll = function (name) {
+	  if (!this.has(name)) {
+	    return [];
+	  }
+
+	  return this._headers[name.toLowerCase()];
 	};
-	
+
 	/**
 	 * Iterate over all headers
 	 *
@@ -12316,14 +12221,14 @@
 	 * @param   Boolean   thisArg   `this` context for callback function
 	 * @return  Void
 	 */
-	Headers.prototype.forEach = function(callback, thisArg) {
-		Object.getOwnPropertyNames(this._headers).forEach(function(name) {
-			this._headers[name].forEach(function(value) {
-				callback.call(thisArg, value, name, this)
-			}, this)
-		}, this)
-	}
-	
+	Headers.prototype.forEach = function (callback, thisArg) {
+	  Object.getOwnPropertyNames(this._headers).forEach(function (name) {
+	    this._headers[name].forEach(function (value) {
+	      callback.call(thisArg, value, name, this);
+	    }, this);
+	  }, this);
+	};
+
 	/**
 	 * Overwrite header values given name
 	 *
@@ -12331,10 +12236,10 @@
 	 * @param   String  value  Header value
 	 * @return  Void
 	 */
-	Headers.prototype.set = function(name, value) {
-		this._headers[name.toLowerCase()] = [value];
+	Headers.prototype.set = function (name, value) {
+	  this._headers[name.toLowerCase()] = [value];
 	};
-	
+
 	/**
 	 * Append a value onto existing header
 	 *
@@ -12342,62 +12247,62 @@
 	 * @param   String  value  Header value
 	 * @return  Void
 	 */
-	Headers.prototype.append = function(name, value) {
-		if (!this.has(name)) {
-			this.set(name, value);
-			return;
-		}
-	
-		this._headers[name.toLowerCase()].push(value);
+	Headers.prototype.append = function (name, value) {
+	  if (!this.has(name)) {
+	    this.set(name, value);
+	    return;
+	  }
+
+	  this._headers[name.toLowerCase()].push(value);
 	};
-	
+
 	/**
 	 * Check for header name existence
 	 *
 	 * @param   String   name  Header name
 	 * @return  Boolean
 	 */
-	Headers.prototype.has = function(name) {
-		return this._headers.hasOwnProperty(name.toLowerCase());
+	Headers.prototype.has = function (name) {
+	  return this._headers.hasOwnProperty(name.toLowerCase());
 	};
-	
+
 	/**
 	 * Delete all header values given name
 	 *
 	 * @param   String  name  Header name
 	 * @return  Void
 	 */
-	Headers.prototype['delete'] = function(name) {
-		delete this._headers[name.toLowerCase()];
+	Headers.prototype['delete'] = function (name) {
+	  delete this._headers[name.toLowerCase()];
 	};
-	
+
 	/**
 	 * Return raw headers (non-spec api)
 	 *
 	 * @return  Object
 	 */
-	Headers.prototype.raw = function() {
-		return this._headers;
+	Headers.prototype.raw = function () {
+	  return this._headers;
 	};
-
 
 /***/ },
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	'use strict';
+
 	/**
 	 * request.js
 	 *
 	 * Request class contains server only options
 	 */
-	
+
 	var parse_url = __webpack_require__(7).parse;
 	var Headers = __webpack_require__(41);
 	var Body = __webpack_require__(12);
-	
+
 	module.exports = Request;
-	
+
 	/**
 	 * Request class
 	 *
@@ -12407,7 +12312,7 @@
 	 */
 	function Request(input, init) {
 		var url, url_parsed;
-	
+
 		// normalize input
 		if (!(input instanceof Request)) {
 			url = input;
@@ -12417,31 +12322,27 @@
 			url = input.url;
 			url_parsed = parse_url(url);
 		}
-	
+
 		// normalize init
 		init = init || {};
-	
+
 		// fetch spec options
 		this.method = init.method || input.method || 'GET';
 		this.redirect = init.redirect || input.redirect || 'follow';
 		this.headers = new Headers(init.headers || input.headers || {});
 		this.url = url;
-	
+
 		// server only options
-		this.follow = init.follow !== undefined ?
-			init.follow : input.follow !== undefined ?
-			input.follow : 20;
-		this.compress = init.compress !== undefined ?
-			init.compress : input.compress !== undefined ?
-			input.compress : true;
+		this.follow = init.follow !== undefined ? init.follow : input.follow !== undefined ? input.follow : 20;
+		this.compress = init.compress !== undefined ? init.compress : input.compress !== undefined ? input.compress : true;
 		this.counter = init.counter || input.counter || 0;
 		this.agent = init.agent || input.agent;
-	
+
 		Body.call(this, init.body || this._clone(input), {
 			timeout: init.timeout || input.timeout || 0,
 			size: init.size || input.size || 0
 		});
-	
+
 		// server request options
 		this.protocol = url_parsed.protocol;
 		this.hostname = url_parsed.hostname;
@@ -12449,41 +12350,43 @@
 		this.path = url_parsed.path;
 		this.auth = url_parsed.auth;
 	}
-	
+
 	Request.prototype = Object.create(Body.prototype);
-	
+
 	/**
 	 * Clone this request
 	 *
 	 * @return  Request
 	 */
-	Request.prototype.clone = function() {
+	Request.prototype.clone = function () {
 		return new Request(this);
 	};
-
 
 /***/ },
 /* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;//     uuid.js
+	var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+
+	//     uuid.js
 	//
 	//     Copyright (c) 2010-2012 Robert Kieffer
 	//     MIT License - http://opensource.org/licenses/mit-license.php
-	
+
 	/*global window, require, define */
-	(function(_window) {
+	(function (_window) {
 	  'use strict';
-	
+
 	  // Unique ID creation requires a high quality random # generator.  We feature
 	  // detect to determine the best RNG source, normalizing to a function that
 	  // returns 128-bits of randomness, since that's what's usually required
+
 	  var _rng, _mathRNG, _nodeRNG, _whatwgRNG, _previousRoot;
-	
+
 	  function setupBrowser() {
 	    // Allow for MSIE11 msCrypto
 	    var _crypto = _window.crypto || _window.msCrypto;
-	
+
 	    if (!_rng && _crypto && _crypto.getRandomValues) {
 	      // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
 	      //
@@ -12495,21 +12398,23 @@
 	          return _rnds8;
 	        };
 	        _rng();
-	      } catch(e) {}
+	      } catch (e) {}
 	    }
-	
+
 	    if (!_rng) {
 	      // Math.random()-based (RNG)
 	      //
 	      // If all else fails, use Math.random().  It's fast, but is of unspecified
 	      // quality.
-	      var  _rnds = new Array(16);
-	      _mathRNG = _rng = function() {
+	      var _rnds = new Array(16);
+	      _mathRNG = _rng = function _rng() {
 	        for (var i = 0, r; i < 16; i++) {
-	          if ((i & 0x03) === 0) { r = Math.random() * 0x100000000; }
+	          if ((i & 0x03) === 0) {
+	            r = Math.random() * 0x100000000;
+	          }
 	          _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
 	        }
-	
+
 	        return _rnds;
 	      };
 	      if ('undefined' !== typeof console && console.warn) {
@@ -12517,7 +12422,7 @@
 	      }
 	    }
 	  }
-	
+
 	  function setupNode() {
 	    // Node.js crypto-based RNG - http://nodejs.org/docs/v0.6.2/api/crypto.html
 	    //
@@ -12525,21 +12430,23 @@
 	    if (true) {
 	      try {
 	        var _rb = __webpack_require__(44).randomBytes;
-	        _nodeRNG = _rng = _rb && function() {return _rb(16);};
+	        _nodeRNG = _rng = _rb && function () {
+	          return _rb(16);
+	        };
 	        _rng();
-	      } catch(e) {}
+	      } catch (e) {}
 	    }
 	  }
-	
+
 	  if (_window) {
 	    setupBrowser();
 	  } else {
 	    setupNode();
 	  }
-	
+
 	  // Buffer class to use
-	  var BufferClass = ('function' === typeof Buffer) ? Buffer : Array;
-	
+	  var BufferClass = 'function' === typeof Buffer ? Buffer : Array;
+
 	  // Maps for number <-> hex string conversion
 	  var _byteToHex = [];
 	  var _hexToByte = {};
@@ -12547,164 +12454,158 @@
 	    _byteToHex[i] = (i + 0x100).toString(16).substr(1);
 	    _hexToByte[_byteToHex[i]] = i;
 	  }
-	
+
 	  // **`parse()` - Parse a UUID into it's component bytes**
 	  function parse(s, buf, offset) {
-	    var i = (buf && offset) || 0, ii = 0;
-	
+	    var i = buf && offset || 0,
+	        ii = 0;
+
 	    buf = buf || [];
-	    s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
-	      if (ii < 16) { // Don't overflow!
+	    s.toLowerCase().replace(/[0-9a-f]{2}/g, function (oct) {
+	      if (ii < 16) {
+	        // Don't overflow!
 	        buf[i + ii++] = _hexToByte[oct];
 	      }
 	    });
-	
+
 	    // Zero out remaining bytes if string was short
 	    while (ii < 16) {
 	      buf[i + ii++] = 0;
 	    }
-	
+
 	    return buf;
 	  }
-	
+
 	  // **`unparse()` - Convert UUID byte array (ala parse()) into a string**
 	  function unparse(buf, offset) {
-	    var i = offset || 0, bth = _byteToHex;
-	    return  bth[buf[i++]] + bth[buf[i++]] +
-	            bth[buf[i++]] + bth[buf[i++]] + '-' +
-	            bth[buf[i++]] + bth[buf[i++]] + '-' +
-	            bth[buf[i++]] + bth[buf[i++]] + '-' +
-	            bth[buf[i++]] + bth[buf[i++]] + '-' +
-	            bth[buf[i++]] + bth[buf[i++]] +
-	            bth[buf[i++]] + bth[buf[i++]] +
-	            bth[buf[i++]] + bth[buf[i++]];
+	    var i = offset || 0,
+	        bth = _byteToHex;
+	    return bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]] + '-' + bth[buf[i++]] + bth[buf[i++]] + '-' + bth[buf[i++]] + bth[buf[i++]] + '-' + bth[buf[i++]] + bth[buf[i++]] + '-' + bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]] + bth[buf[i++]];
 	  }
-	
+
 	  // **`v1()` - Generate time-based UUID**
 	  //
 	  // Inspired by https://github.com/LiosK/UUID.js
 	  // and http://docs.python.org/library/uuid.html
-	
+
 	  // random #'s we need to init node and clockseq
 	  var _seedBytes = _rng();
-	
+
 	  // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-	  var _nodeId = [
-	    _seedBytes[0] | 0x01,
-	    _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
-	  ];
-	
+	  var _nodeId = [_seedBytes[0] | 0x01, _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]];
+
 	  // Per 4.2.2, randomize (14 bit) clockseq
 	  var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
-	
+
 	  // Previous uuid creation time
-	  var _lastMSecs = 0, _lastNSecs = 0;
-	
+	  var _lastMSecs = 0,
+	      _lastNSecs = 0;
+
 	  // See https://github.com/broofa/node-uuid for API details
 	  function v1(options, buf, offset) {
 	    var i = buf && offset || 0;
 	    var b = buf || [];
-	
+
 	    options = options || {};
-	
-	    var clockseq = (options.clockseq != null) ? options.clockseq : _clockseq;
-	
+
+	    var clockseq = options.clockseq != null ? options.clockseq : _clockseq;
+
 	    // UUID timestamps are 100 nano-second units since the Gregorian epoch,
 	    // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
 	    // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
 	    // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-	    var msecs = (options.msecs != null) ? options.msecs : new Date().getTime();
-	
+	    var msecs = options.msecs != null ? options.msecs : new Date().getTime();
+
 	    // Per 4.2.1.2, use count of uuid's generated during the current clock
 	    // cycle to simulate higher resolution clock
-	    var nsecs = (options.nsecs != null) ? options.nsecs : _lastNSecs + 1;
-	
+	    var nsecs = options.nsecs != null ? options.nsecs : _lastNSecs + 1;
+
 	    // Time since last uuid creation (in msecs)
-	    var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
-	
+	    var dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000;
+
 	    // Per 4.2.1.2, Bump clockseq on clock regression
 	    if (dt < 0 && options.clockseq == null) {
 	      clockseq = clockseq + 1 & 0x3fff;
 	    }
-	
+
 	    // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
 	    // time interval
 	    if ((dt < 0 || msecs > _lastMSecs) && options.nsecs == null) {
 	      nsecs = 0;
 	    }
-	
+
 	    // Per 4.2.1.2 Throw error if too many uuids are requested
 	    if (nsecs >= 10000) {
 	      throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
 	    }
-	
+
 	    _lastMSecs = msecs;
 	    _lastNSecs = nsecs;
 	    _clockseq = clockseq;
-	
+
 	    // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
 	    msecs += 12219292800000;
-	
+
 	    // `time_low`
 	    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
 	    b[i++] = tl >>> 24 & 0xff;
 	    b[i++] = tl >>> 16 & 0xff;
 	    b[i++] = tl >>> 8 & 0xff;
 	    b[i++] = tl & 0xff;
-	
+
 	    // `time_mid`
-	    var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+	    var tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
 	    b[i++] = tmh >>> 8 & 0xff;
 	    b[i++] = tmh & 0xff;
-	
+
 	    // `time_high_and_version`
 	    b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
 	    b[i++] = tmh >>> 16 & 0xff;
-	
+
 	    // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
 	    b[i++] = clockseq >>> 8 | 0x80;
-	
+
 	    // `clock_seq_low`
 	    b[i++] = clockseq & 0xff;
-	
+
 	    // `node`
 	    var node = options.node || _nodeId;
 	    for (var n = 0; n < 6; n++) {
 	      b[i + n] = node[n];
 	    }
-	
+
 	    return buf ? buf : unparse(b);
 	  }
-	
+
 	  // **`v4()` - Generate random UUID**
-	
+
 	  // See https://github.com/broofa/node-uuid for API details
 	  function v4(options, buf, offset) {
 	    // Deprecated - 'format' argument, as supported in v1.2
 	    var i = buf && offset || 0;
-	
-	    if (typeof(options) === 'string') {
-	      buf = (options === 'binary') ? new BufferClass(16) : null;
+
+	    if (typeof options === 'string') {
+	      buf = options === 'binary' ? new BufferClass(16) : null;
 	      options = null;
 	    }
 	    options = options || {};
-	
+
 	    var rnds = options.random || (options.rng || _rng)();
-	
+
 	    // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-	    rnds[6] = (rnds[6] & 0x0f) | 0x40;
-	    rnds[8] = (rnds[8] & 0x3f) | 0x80;
-	
+	    rnds[6] = rnds[6] & 0x0f | 0x40;
+	    rnds[8] = rnds[8] & 0x3f | 0x80;
+
 	    // Copy bytes to buffer, if provided
 	    if (buf) {
 	      for (var ii = 0; ii < 16; ii++) {
 	        buf[i + ii] = rnds[ii];
 	      }
 	    }
-	
+
 	    return buf || unparse(rnds);
 	  }
-	
+
 	  // Export public API
 	  var uuid = v4;
 	  uuid.v1 = v1;
@@ -12716,29 +12617,28 @@
 	  uuid._mathRNG = _mathRNG;
 	  uuid._nodeRNG = _nodeRNG;
 	  uuid._whatwgRNG = _whatwgRNG;
-	
-	  if (('undefined' !== typeof module) && module.exports) {
+
+	  if ('undefined' !== typeof module && module.exports) {
 	    // Publish as node.js module
 	    module.exports = uuid;
 	  } else if (true) {
 	    // Publish as AMD module
-	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {return uuid;}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	
-	
+	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	      return uuid;
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else {
 	    // Publish as global (in browsers)
 	    _previousRoot = _window.uuid;
-	
+
 	    // **`noConflict()` - (browser only) to reset global 'uuid' var**
-	    uuid.noConflict = function() {
+	    uuid.noConflict = function () {
 	      _window.uuid = _previousRoot;
 	      return uuid;
 	    };
-	
+
 	    _window.uuid = uuid;
 	  }
 	})('undefined' !== typeof window ? window : null);
-
 
 /***/ },
 /* 44 */
@@ -12750,40 +12650,45 @@
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const {DEFAULT_MAX_STEPS} = __webpack_require__(4);
-	const logger = __webpack_require__(2);
-	const readline = __webpack_require__(46);
-	const uuid = __webpack_require__(43);
-	
-	module.exports = (wit, initContext, maxSteps) => {
-	  let context = typeof initContext === 'object' ? initContext : {};
-	  const sessionId = uuid.v1();
-	
-	  const steps = maxSteps ? maxSteps : DEFAULT_MAX_STEPS;
-	  const rl = readline.createInterface({
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _require = __webpack_require__(4),
+	    DEFAULT_MAX_STEPS = _require.DEFAULT_MAX_STEPS;
+
+	var logger = __webpack_require__(2);
+	var readline = __webpack_require__(46);
+	var uuid = __webpack_require__(43);
+
+	module.exports = function (wit, initContext, maxSteps) {
+	  var context = (typeof initContext === 'undefined' ? 'undefined' : _typeof(initContext)) === 'object' ? initContext : {};
+	  var sessionId = uuid.v1();
+
+	  var steps = maxSteps ? maxSteps : DEFAULT_MAX_STEPS;
+	  var rl = readline.createInterface({
 	    input: process.stdin,
-	    output: process.stdout,
+	    output: process.stdout
 	  });
 	  rl.setPrompt('> ');
-	  const prompt = () => {
+	  var prompt = function prompt() {
 	    rl.prompt();
-	    rl.write(null, {ctrl: true, name: 'e'});
+	    rl.write(null, { ctrl: true, name: 'e' });
 	  };
 	  prompt();
-	  rl.on('line', (line) => {
+	  rl.on('line', function (line) {
 	    line = line.trim();
 	    if (!line) {
 	      return prompt();
 	    }
-	    wit.runActions(sessionId, line, context, steps)
-	    .then((ctx) => {
+	    wit.runActions(sessionId, line, context, steps).then(function (ctx) {
 	      context = ctx;
 	      prompt();
-	    })
-	    .catch(err => console.error(err))
+	    }).catch(function (err) {
+	      return console.error(err);
+	    });
 	  });
 	};
-
 
 /***/ },
 /* 46 */

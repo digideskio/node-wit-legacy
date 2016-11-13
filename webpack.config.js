@@ -6,7 +6,17 @@ module.exports = {
   target: 'node',
   module: {
     loaders: [
-      { test: /\.json$/, loader: "json-loader" }
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      }
     ]
   },
   plugins: [

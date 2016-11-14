@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test-lib": "mocha ./tests/lib &&",
-    "prepublish": "npm test",
+    "prepublish": "npm run test-lib && npm test",
     "test": "webpack && mocha ./tests/dist"
   },
   "author": "",

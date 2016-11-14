@@ -7,7 +7,11 @@
     "prepublish": "npm test",
     "test": "webpack && mocha ./tests/dist"
   },
-  "author": "",
+  "author": "Eetu Tuomala (https://sc5.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laardee/node-wit-legacy.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.18.2",

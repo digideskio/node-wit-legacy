@@ -3,7 +3,11 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
-module.exports.runTests = ({log, Wit, interactive}) => {
+module.exports.runTests = (wit) => {
+  const log = wit.log;
+  const Wit = wit.Wit;
+  const interacive = wit.interactive;
+
   describe('utils', () => {
     let loggerStub;
 

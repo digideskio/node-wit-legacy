@@ -4,8 +4,9 @@
   "description": "node-wit library port for older node versions",
   "main": "dist/index.js",
   "scripts": {
+    "test-lib": "mocha ./tests/lib &&",
     "prepublish": "npm test",
-    "test": "mocha ./tests/lib && webpack && mocha ./tests/dist"
+    "test": "webpack && mocha ./tests/dist"
   },
   "author": "",
   "license": "MIT",
